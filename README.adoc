@@ -1,0 +1,5 @@
+# Expense Tracker Service
+
+A service to track expenses and learn some fundamentals of Spring Boot, TDD/BDD, DDD and CD.
+
+This project is part of my personal https://github.com/roamingthings/100-days-of-code[100 Days of Code] challenge.
