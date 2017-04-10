@@ -1,5 +1,10 @@
 spring:
   application:
     name: expenses-service
+  profiles:
+    active: dev
+  jpa:
+    hibernate:
+      ddl-auto: none
 server:
-  port: 9191
+  port: 8080

@@ -16,12 +16,12 @@ import static org.junit.Assert.assertThat;
  * @version 2017/04/09
  */
 public class SmokeST {
-
+    public static final String URI_SERVICE = "http://localhost:8080/health";
     private WebTarget baseTarget;
 
     @Before
     public void setUp() {
-        baseTarget = ClientBuilder.newClient().target("http://localhost:9191/health");
+        baseTarget = ClientBuilder.newClient().target(URI_SERVICE);
     }
 
     @Test
