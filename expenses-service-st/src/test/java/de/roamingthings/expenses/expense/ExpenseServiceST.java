@@ -23,7 +23,7 @@ public class ExpenseServiceST {
 
     @Test
     public void shouldCreateRecurringExpense() {
-        final URI createdAccountUri1 = createAndAssertRecurringExpense(
+        final URI createdRecurringExpense1 = createAndAssertRecurringExpense(
                 "Recurring Payment 1",
                 "testpayment",
                 "MEMBERSHIP",
@@ -33,7 +33,7 @@ public class ExpenseServiceST {
                 "Creditor 1",
                 "Note 1"
         );
-        final URI createdAccountUri2 = createAndAssertRecurringExpense(
+        final URI createdRecurringExpense2 = createAndAssertRecurringExpense(
                 "Recurring Payment 2",
                 "testpayment",
                 "MEMBERSHIP",
@@ -43,7 +43,7 @@ public class ExpenseServiceST {
                 "Creditor 2",
                 "Note 2"
         );
-        final URI createdAccountUri3 = createAndAssertRecurringExpense(
+        final URI createdRecurringExpense3 = createAndAssertRecurringExpense(
                 "Recurring Payment 3",
                 "testpayment",
                 "MEMBERSHIP",
@@ -54,14 +54,14 @@ public class ExpenseServiceST {
                 "Note 3"
         );
 
-        assertRecurringPaymentExist(createdAccountUri1, createdAccountUri2, createdAccountUri3);
+        assertRecurringExpenseExist(createdRecurringExpense1, createdRecurringExpense2, createdRecurringExpense3);
 
-        deletePaymentAccount(createdAccountUri1);
-        deletePaymentAccount(createdAccountUri2);
+        deleteRecurringExpense(createdRecurringExpense1);
+        deleteRecurringExpense(createdRecurringExpense2);
 
-        assertNotFound(createdAccountUri1);
-        assertNotFound(createdAccountUri2);
-        assertFound(createdAccountUri3);
+        assertNotFound(createdRecurringExpense1);
+        assertNotFound(createdRecurringExpense2);
+        assertFound(createdRecurringExpense3);
     }
 
     private URI createAndAssertRecurringExpense(
@@ -95,12 +95,12 @@ public class ExpenseServiceST {
         return uri;
     }
 
-    private void assertRecurringPaymentExist(final URI... uris) {
+    private void assertRecurringExpenseExist(final URI... uris) {
         final List<URI> paymentAccounts = client.retrieve();
         assertThat(paymentAccounts, hasItems(uris));
     }
 
-    private void deletePaymentAccount(URI uri) {
+    private void deleteRecurringExpense(URI uri) {
         client.delete(uri);
     }
 
