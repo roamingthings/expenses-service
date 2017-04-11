@@ -39,4 +39,7 @@ dependencies {
 	runtime('org.springframework.boot:spring-boot-devtools')
 
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile('org.glassfish.jersey.core:jersey-client:2.25')
+    testCompile('org.glassfish.jersey.media:jersey-media-json-processing:2.25')
+    testCompile('org.glassfish:javax.json:1.0.4')
 }
