@@ -6,7 +6,7 @@ import java.math.BigDecimal;
  * @author Alexander Sparkowsky [info@roamingthings.de]
  * @version 2017/04/10
  */
-public class RecurringExpense {
+public class RecurringExpenseRVO {
     private final String description;
 
     private final String label;
@@ -23,7 +23,7 @@ public class RecurringExpense {
 
     private final String note;
 
-    public RecurringExpense(String description, String label, String recurrencePeriod, String expenseType, BigDecimal amount, String currency, String creditorName, String note) {
+    public RecurringExpenseRVO(String description, String label, String recurrencePeriod, String expenseType, BigDecimal amount, String currency, String creditorName, String note) {
         this.description = description;
         this.label = label;
         this.recurrencePeriod = recurrencePeriod;

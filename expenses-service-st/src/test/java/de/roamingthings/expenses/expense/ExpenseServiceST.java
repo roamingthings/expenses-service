@@ -82,15 +82,15 @@ public class ExpenseServiceST {
                 currency,
                 creditorName,
                 note);
-        final RecurringExpense recurringExpense = client.retrieve(uri);
+        final RecurringExpenseRVO recurringExpenseRVO = client.retrieve(uri);
 
-        assertThat(recurringExpense.getLabel(), is(label));
-        assertThat(recurringExpense.getExpenseType(), is(expenseType));
-        assertThat(recurringExpense.getRecurrencePeriod(), is(recurringPeriod));
-        assertThat(recurringExpense.getAmount(), is(amount));
-        assertThat(recurringExpense.getCurrency(), is(currency));
-        assertThat(recurringExpense.getCreditorName(), is(creditorName));
-        assertThat(recurringExpense.getNote(), is(note));
+        assertThat(recurringExpenseRVO.getLabel(), is(label));
+        assertThat(recurringExpenseRVO.getExpenseType(), is(expenseType));
+        assertThat(recurringExpenseRVO.getRecurrencePeriod(), is(recurringPeriod));
+        assertThat(recurringExpenseRVO.getAmount(), is(amount));
+        assertThat(recurringExpenseRVO.getCurrency(), is(currency));
+        assertThat(recurringExpenseRVO.getCreditorName(), is(creditorName));
+        assertThat(recurringExpenseRVO.getNote(), is(note));
 
         return uri;
     }

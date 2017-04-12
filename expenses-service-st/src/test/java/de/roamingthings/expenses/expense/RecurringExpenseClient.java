@@ -88,7 +88,7 @@ public class RecurringExpenseClient extends ExternalResource {
                 .collect(toList());
     }
 
-    public RecurringExpense retrieve(URI uri) {
+    public RecurringExpenseRVO retrieve(URI uri) {
         final Response response = client.target(uri).request(MediaType.APPLICATION_JSON_TYPE).get();
         if (response.getStatus() == Response.Status.NOT_FOUND.getStatusCode()) {
             return null;
@@ -97,7 +97,7 @@ public class RecurringExpenseClient extends ExternalResource {
 
         final JsonObject object = response.readEntity(JsonObject.class);
 
-        return new RecurringExpense(
+        return new RecurringExpenseRVO(
                 object.getString("description"),
                 object.getString("label"),
                 object.getString("recurrencePeriod"),
