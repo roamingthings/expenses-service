@@ -1,5 +1,7 @@
 package de.roamingthings.expenses.business.expense.domain;
 
+import de.roamingthings.expenses.Creatable;
+import de.roamingthings.expenses.CreatableEntityListener;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -9,6 +11,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * @author Alexander Sparkowsky [info@roamingthings.de]
@@ -20,13 +23,18 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Entity
 @Table(name = "recurring_expense")
-public class RecurringExpense {
+@EntityListeners(CreatableEntityListener.class)
+public class RecurringExpense implements Creatable {
     @Id
     @GeneratedValue
     private Long id;
 
     @Version
     private int version;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created_at")
+    private Date createdAt;
 
     @NotNull
     private String description;

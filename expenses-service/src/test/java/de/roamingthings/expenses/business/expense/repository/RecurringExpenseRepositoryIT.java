@@ -1,6 +1,5 @@
 package de.roamingthings.expenses.business.expense.repository;
 
-import org.hamcrest.MatcherAssert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,6 +15,7 @@ import java.util.List;
 
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
@@ -97,20 +97,20 @@ public class RecurringExpenseRepositoryIT {
                 note);
         final RecurringExpenseRVO recurringExpense = client.retrieve(uri);
 
-        MatcherAssert.assertThat(recurringExpense.getLabel(), is(label));
-        MatcherAssert.assertThat(recurringExpense.getExpenseType(), is(expenseType));
-        MatcherAssert.assertThat(recurringExpense.getRecurrencePeriod(), is(recurringPeriod));
-        MatcherAssert.assertThat(recurringExpense.getAmount(), is(amount));
-        MatcherAssert.assertThat(recurringExpense.getCurrency(), is(currency));
-        MatcherAssert.assertThat(recurringExpense.getCreditorName(), is(creditorName));
-        MatcherAssert.assertThat(recurringExpense.getNote(), is(note));
+        assertThat(recurringExpense.getLabel(), is(label));
+        assertThat(recurringExpense.getExpenseType(), is(expenseType));
+        assertThat(recurringExpense.getRecurrencePeriod(), is(recurringPeriod));
+        assertThat(recurringExpense.getAmount(), is(amount));
+        assertThat(recurringExpense.getCurrency(), is(currency));
+        assertThat(recurringExpense.getCreditorName(), is(creditorName));
+        assertThat(recurringExpense.getNote(), is(note));
 
         return uri;
     }
 
     private void assertRecurringExpenseExist(final URI... uris) {
         final List<URI> paymentAccounts = client.retrieve();
-        MatcherAssert.assertThat(paymentAccounts, hasItems(uris));
+        assertThat(paymentAccounts, hasItems(uris));
     }
 
     private void deleteRecurringExpense(URI uri) {
