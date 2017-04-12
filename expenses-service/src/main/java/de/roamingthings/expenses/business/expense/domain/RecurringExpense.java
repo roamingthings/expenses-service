@@ -1,7 +1,7 @@
 package de.roamingthings.expenses.business.expense.domain;
 
-import de.roamingthings.expenses.Creatable;
-import de.roamingthings.expenses.CreatableEntityListener;
+import de.roamingthings.expenses.metadata.Creatable;
+import de.roamingthings.expenses.metadata.Modifiable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -23,8 +23,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Entity
 @Table(name = "recurring_expense")
-@EntityListeners(CreatableEntityListener.class)
-public class RecurringExpense implements Creatable {
+public class RecurringExpense implements Creatable, Modifiable {
     @Id
     @GeneratedValue
     private Long id;
@@ -35,6 +34,10 @@ public class RecurringExpense implements Creatable {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at")
     private Date createdAt;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "modified_at")
+    private Date modifiedAt;
 
     @NotNull
     private String description;

@@ -9,7 +9,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
 
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.lessThan;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
 
 /**
  * @author Alexander Sparkowsky [info@roamingthings.de]
@@ -22,21 +25,39 @@ public class RecurringExpenseJpaIT {
     private TestEntityManager entityManager;
 
     @Test
-    public void persistingShouldAddCreationDate() {
-        RecurringExpense expense = new RecurringExpense(
-                "Test description",
-                "label",
-                RecurrencePeriod.MONTHLY,
-                ExpenseType.SUBSCRIPTION,
-                BigDecimal.valueOf(1.23),
-                "EUR",
-                "Creditor",
-                "Note");
+    public void persistingShouldAddCreationAndModifiedDate() {
+        RecurringExpense expense = getRecurringExpenseFixture();
 
         final RecurringExpense persistedExpense = entityManager.persist(expense);
 
         assertNotNull(persistedExpense.getId());
         assertNotNull(persistedExpense.getCreatedAt());
+        assertNotNull(persistedExpense.getModifiedAt());
+        assertThat(persistedExpense.getCreatedAt(), is(persistedExpense.getModifiedAt()));
+    }
+
+    @Test
+    public void updatingShouldUpdateModifiedDate() {
+        RecurringExpense expense = getRecurringExpenseFixture();
+        final RecurringExpense persistedExpense = entityManager.persist(expense);
+        persistedExpense.setNote("Modified");
+
+        final RecurringExpense updatedExpense = entityManager.merge(persistedExpense);
+        entityManager.flush();
+
+        assertThat(updatedExpense.getCreatedAt(), lessThan(updatedExpense.getModifiedAt()));
+    }
+
+    private RecurringExpense getRecurringExpenseFixture() {
+        return new RecurringExpense(
+                    "Test description",
+                    "label",
+                    RecurrencePeriod.MONTHLY,
+                    ExpenseType.SUBSCRIPTION,
+                    BigDecimal.valueOf(1.23),
+                    "EUR",
+                    "Creditor",
+                    "Note");
     }
 
 }

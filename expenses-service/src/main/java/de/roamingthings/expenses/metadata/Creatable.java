@@ -1,4 +1,4 @@
-package de.roamingthings.expenses;
+package de.roamingthings.expenses.metadata;
 
 import java.util.Date;
 
