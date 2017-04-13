@@ -11,6 +11,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
 import java.net.URI;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.hasItems;
@@ -35,10 +38,11 @@ public class RecurringExpenseRepositoryIT {
     public RecurringExpenseClient client = new RecurringExpenseClient("http://localhost:8080/recurring_expenses");
 
     @Test
-    public void shouldCreateRecurringExpense() {
+    public void shouldCreateRecurringExpense() throws Exception {
         final URI createdRecurringExpense1 = createAndAssertRecurringExpense(
                 "Recurring Payment 1",
                 "testpayment",
+                new Date(),
                 "MEMBERSHIP",
                 "YEARLY",
                 BigDecimal.valueOf(1.23),
@@ -49,6 +53,7 @@ public class RecurringExpenseRepositoryIT {
         final URI createdRecurringExpense2 = createAndAssertRecurringExpense(
                 "Recurring Payment 2",
                 "testpayment",
+                new Date(),
                 "MEMBERSHIP",
                 "MONTHLY",
                 BigDecimal.valueOf(2.34),
@@ -59,6 +64,7 @@ public class RecurringExpenseRepositoryIT {
         final URI createdRecurringExpense3 = createAndAssertRecurringExpense(
                 "Recurring Payment 3",
                 "testpayment",
+                new Date(),
                 "MEMBERSHIP",
                 "WEEKLY",
                 BigDecimal.valueOf(5.67),
@@ -80,15 +86,17 @@ public class RecurringExpenseRepositoryIT {
     private URI createAndAssertRecurringExpense(
             final String description,
             final String label,
+            final Date nextDueDate,
             final String expenseType,
             final String recurringPeriod,
             final BigDecimal amount,
             final String currency,
             final String creditorName,
             final String note
-    ) {
+    ) throws Exception {
         final URI uri = client.create(description,
                 label,
+                nextDueDate,
                 recurringPeriod,
                 expenseType,
                 amount,
@@ -104,6 +112,7 @@ public class RecurringExpenseRepositoryIT {
         assertThat(recurringExpense.getCurrency(), is(currency));
         assertThat(recurringExpense.getCreditorName(), is(creditorName));
         assertThat(recurringExpense.getNote(), is(note));
+        assertEqualDateIgnroingTime(nextDueDate, recurringExpense.getNextDueDate());
 
         return uri;
     }
@@ -117,11 +126,16 @@ public class RecurringExpenseRepositoryIT {
         client.delete(uri);
     }
 
-    private void assertNotFound(URI uri) {
+    private void assertNotFound(URI uri) throws Exception {
         assertNull(client.retrieve(uri));
     }
 
-    private void assertFound(URI uri) {
+    private void assertFound(URI uri) throws Exception {
         assertNotNull(client.retrieve(uri));
+    }
+
+    private void assertEqualDateIgnroingTime(Date expectedDate, Date actualDate) {
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        assertThat(formatter.format(actualDate), is(formatter.format(expectedDate)));
     }
 }

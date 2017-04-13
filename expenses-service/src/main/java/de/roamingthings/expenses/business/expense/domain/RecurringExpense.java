@@ -44,6 +44,10 @@ public class RecurringExpense implements Creatable, Modifiable {
 
     private String label;
 
+    @Column(name = "next_due_date")
+    @Temporal(TemporalType.DATE)
+    private Date nextDueDate;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "recurrence_period")
     private RecurrencePeriod recurrencePeriod;
@@ -66,9 +70,19 @@ public class RecurringExpense implements Creatable, Modifiable {
     @Column
     private String note;
 
-    public RecurringExpense(String description, String label, RecurrencePeriod recurrencePeriod, ExpenseType expenseType, BigDecimal amount, String currency, String creditorName, String note) {
+    public RecurringExpense(
+            String description,
+            String label,
+            Date nextDueDate,
+            RecurrencePeriod recurrencePeriod,
+            ExpenseType expenseType,
+            BigDecimal amount,
+            String currency,
+            String creditorName,
+            String note) {
         this.description = description;
         this.label = label;
+        this.nextDueDate = nextDueDate;
         this.recurrencePeriod = recurrencePeriod;
         this.expenseType = expenseType;
         this.amount = amount;

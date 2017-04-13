@@ -1,6 +1,7 @@
 package de.roamingthings.expenses.business.expense.repository;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * @author Alexander Sparkowsky [info@roamingthings.de]
@@ -10,6 +11,8 @@ public class RecurringExpenseRVO {
     private final String description;
 
     private final String label;
+
+    private final Date nextDueDate;
 
     private final String recurrencePeriod;
 
@@ -23,9 +26,19 @@ public class RecurringExpenseRVO {
 
     private final String note;
 
-    public RecurringExpenseRVO(String description, String label, String recurrencePeriod, String expenseType, BigDecimal amount, String currency, String creditorName, String note) {
+    public RecurringExpenseRVO(
+            String description,
+            String label,
+            Date nextDueDate,
+            String recurrencePeriod,
+            String expenseType,
+            BigDecimal amount,
+            String currency,
+            String creditorName,
+            String note) {
         this.description = description;
         this.label = label;
+        this.nextDueDate = nextDueDate;
         this.recurrencePeriod = recurrencePeriod;
         this.expenseType = expenseType;
         this.amount = amount;
@@ -64,5 +77,9 @@ public class RecurringExpenseRVO {
 
     public String getNote() {
         return note;
+    }
+
+    public Date getNextDueDate() {
+        return nextDueDate;
     }
 }

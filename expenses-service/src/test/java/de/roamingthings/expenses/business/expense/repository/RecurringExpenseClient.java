@@ -1,5 +1,6 @@
 package de.roamingthings.expenses.business.expense.repository;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.rules.ExternalResource;
 
 import javax.json.Json;
@@ -13,6 +14,10 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.math.BigDecimal;
 import java.net.URI;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -30,11 +35,13 @@ public class RecurringExpenseClient extends ExternalResource {
     private final String baseURI;
     private Client client;
     private WebTarget baseTarget;
+    private DateFormat jsonDateFormatter;
 
     public RecurringExpenseClient(String baseURI) {
         this.baseURI = baseURI;
-    }
 
+        jsonDateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+    }
 
     @Override
     protected void before() throws Throwable {
@@ -46,15 +53,17 @@ public class RecurringExpenseClient extends ExternalResource {
     public URI create(
             final String description,
             final String label,
+            final Date nextDueDate,
             final String recurrencePeriod,
             final String expenseType,
             final BigDecimal amount,
             final String currency,
             final String creditorName,
             final String note
-    ) {
+    ) throws JsonProcessingException {
         final JsonObject expenseObject = Json.createObjectBuilder()
                 .add("description", description)
+                .add("nextDueDate", jsonDateFromDate(nextDueDate))
                 .add("label", label)
                 .add("recurrencePeriod", recurrencePeriod)
                 .add("expenseType", expenseType)
@@ -88,7 +97,7 @@ public class RecurringExpenseClient extends ExternalResource {
                 .collect(toList());
     }
 
-    public RecurringExpenseRVO retrieve(URI uri) {
+    public RecurringExpenseRVO retrieve(URI uri) throws Exception {
         final Response response = client.target(uri).request(MediaType.APPLICATION_JSON_TYPE).get();
         if (response.getStatus() == Response.Status.NOT_FOUND.getStatusCode()) {
             return null;
@@ -100,6 +109,7 @@ public class RecurringExpenseClient extends ExternalResource {
         return new RecurringExpenseRVO(
                 object.getString("description"),
                 object.getString("label"),
+                dateFromJsonDate(object.getString("nextDueDate")),
                 object.getString("recurrencePeriod"),
                 object.getString("expenseType"),
                 object.getJsonNumber("amount").bigDecimalValue(),
@@ -108,6 +118,13 @@ public class RecurringExpenseClient extends ExternalResource {
                 object.getString("note"));
     }
 
+    private Date dateFromJsonDate(String jsonDate) throws ParseException {
+        return jsonDateFormatter.parse(jsonDate);
+    }
+
+    private String jsonDateFromDate(Date dateValue) throws JsonProcessingException {
+        return jsonDateFormatter.format(dateValue);
+    }
 
     public void delete(URI uri) {
         final Response response = client.target(uri).request().delete();
