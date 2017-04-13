@@ -1,1 +1,1 @@
-include 'expenses-service', 'expenses-service-st'
+include 'expenses-service', 'expenses-service-st', 'expenses-static-ui'

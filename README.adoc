@@ -3,3 +3,45 @@
 A service to track expenses and learn some fundamentals of Spring Boot, TDD/BDD, DDD and CD.
 
 This project is part of my personal https://github.com/roamingthings/100-days-of-code[100 Days of Code] challenge.
+
+### Setting up IntelliJ for reloading of web pages
+
+The `devtools` module of Spring Boot allows a browser like Google Chrome to automatically reload webpages when the files are altered while running/debugging the application.
+
+In order to enable this feature you need to perform the following steps:
+
+.Configuration of Spring Boot Application
+
+In the `application.yaml`/`application.properties` file configure devtools to enable _livereload_. Also disable the thymeleaf cache so that pages get rebuild each time they are accessed.
+
+----
+spring:
+    devtools:
+        restart:
+            enabled: true
+        livereload:
+            enabled: true
+    thymeleaf:
+        cache: false
+----
+
+.Get the LiveReload extension
+
+Install the LiveReload extension for your browser from http://livereload.com/extensions/
+
+.Automatically build project in IntelliJ
+
+Enabling the following option will automatically build the project whenever you modify/save any file.
+
+Open IntelliJ Settings and got to `Preferences > Compiler > Build project automatically`
+
+.Enable automatic build while running/debugging in IntelliJ
+
+By default IntelliJ will only build the project automatically when the application is _not_ running or debugging.
+
+In order to also let IntelliJ build the project in this situation you have to enable this in the registry.
+
+* Open the registry by pressing `Cmd-Shift-A` (`Ctrl-Shift-A` on Windows/Linux) and entering `Registry`
+* Enable the option `compiler.automake.allow.when.app.running`
+
+TIP: After opening the registry you can easily find the option by start typing it. This will initiate a search/filter functionality within the dialog.

@@ -35,7 +35,7 @@ public class RecurringExpenseRepositoryIT {
     private int port;
 
     @Rule
-    public RecurringExpenseClient client = new RecurringExpenseClient("http://localhost:8080/recurring_expenses");
+    public RecurringExpenseClient client = new RecurringExpenseClient("http://localhost:9191/recurring_expenses");
 
     @Test
     public void shouldCreateRecurringExpense() throws Exception {

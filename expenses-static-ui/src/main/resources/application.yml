@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: expenses-static-ui
+  profiles:
+    active: dev
+server:
+  port: 8080

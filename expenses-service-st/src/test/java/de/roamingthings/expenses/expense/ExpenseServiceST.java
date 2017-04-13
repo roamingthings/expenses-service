@@ -19,7 +19,7 @@ import static org.junit.Assert.assertNull;
  */
 public class ExpenseServiceST {
     @Rule
-    public RecurringExpenseClient client = new RecurringExpenseClient("http://localhost:8080/recurring_expenses");
+    public RecurringExpenseClient client = new RecurringExpenseClient("http://localhost:9191/recurring_expenses");
 
     @Test
     public void shouldCreateRecurringExpense() {
