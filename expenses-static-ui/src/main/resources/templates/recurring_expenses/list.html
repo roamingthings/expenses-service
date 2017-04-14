@@ -17,17 +17,17 @@
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link th:href="@{/vendor/css/ie10-viewport-bug-workaround.css}"
-          href="../static/vendor/css/ie10-viewport-bug-workaround.css" rel="stylesheet"/>
+          href="../../static/vendor/css/ie10-viewport-bug-workaround.css" rel="stylesheet"/>
 
     <!-- Custom styles for this template -->
-    <link th:href="@{/assets/css/custom.css}" href="../static/assets/css/custom.css" rel="stylesheet"/>
+    <link th:href="@{/assets/css/custom.css}" href="../../static/assets/css/custom.css" rel="stylesheet"/>
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]>
     <script th:src="@{/vendor/js/ie8-responsive-file-warning.js}"
-            src="../static/vendor/js/ie8-responsive-file-warning.js"></script><![endif]-->
+            src="../../static/vendor/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script th:src="@{/vendor/js/ie-emulation-modes-warning.js}"
-            src="../static/vendor/js/ie-emulation-modes-warning.js"></script>
+            src="../../static/vendor/js/ie-emulation-modes-warning.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -68,16 +68,18 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Recurring Expenses</a></li>
+                <li><a href="#">Overview</a></li>
+                <li class="active"><a href="list.html" th:href="@{/recurring_expenses}">Recurring Expenses <span class="sr-only">(current)</span></a></li>
                 <li><a href="#">Expenses</a></li>
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">Overview</h1>
+            <h1 class="page-header">Recurring Expense</h1>
 
-            <h2 class="sub-header">Next Recurring Expenses</h2>
             <div class="table-responsive">
+                <div class="pull-right">
+                    <a href="edit.html" th:href="@{/recurring_expenses/123}" class="btn btn-primary btn-xs" >Add</a>
+                </div>
                 <table class="table table-striped">
                     <thead>
                     <tr>
@@ -109,66 +111,6 @@
                     </tbody>
                 </table>
             </div>
-
-            <h2 class="sub-header">Last Expenses</h2>
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th>Transaction Date</th>
-                        <th>Description</th>
-                        <th>Amount</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>15.04.2017</td>
-                        <td>Awesome Online Shop</td>
-                        <td>19.99 EUR</td>
-                    </tr>
-                    <tr>
-                        <td>12.04.2017</td>
-                        <td>Grocerfriend</td>
-                        <td>10.45 EUR</td>
-                    </tr>
-                    <tr>
-                        <td>12.04.2017</td>
-                        <td>Grocerfriend</td>
-                        <td>10.45 EUR</td>
-                    </tr>
-                    <tr>
-                        <td>12.04.2017</td>
-                        <td>Grocerfriend</td>
-                        <td>10.45 EUR</td>
-                    </tr>
-                    <tr>
-                        <td>12.04.2017</td>
-                        <td>Grocerfriend</td>
-                        <td>10.45 EUR</td>
-                    </tr>
-                    <tr>
-                        <td>12.04.2017</td>
-                        <td>Grocerfriend</td>
-                        <td>10.45 EUR</td>
-                    </tr>
-                    <tr>
-                        <td>12.04.2017</td>
-                        <td>Grocerfriend</td>
-                        <td>10.45 EUR</td>
-                    </tr>
-                    <tr>
-                        <td>12.04.2017</td>
-                        <td>Grocerfriend</td>
-                        <td>10.45 EUR</td>
-                    </tr>
-                    <tr>
-                        <td>12.04.2017</td>
-                        <td>Grocerfriend</td>
-                        <td>10.45 EUR</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
         </div>
     </div>
 </div>
@@ -184,6 +126,6 @@
 
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script th:src="@{/vendor/js/ie10-viewport-bug-workaround.js}"
-        src="../static/vendor/js/ie10-viewport-bug-workaround.js"></script>
+        src="../../static/vendor/js/ie10-viewport-bug-workaround.js"></script>
 </body>
 </html>

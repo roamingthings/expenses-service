@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <title>Expense Tracker</title>
+
+    <!-- Bootstrap core CSS -->
+    <link th:remove="all" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}"/>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link th:href="@{/vendor/css/ie10-viewport-bug-workaround.css}"
+          href="../../static/vendor/css/ie10-viewport-bug-workaround.css" rel="stylesheet"/>
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{/assets/css/custom.css}" href="../../static/assets/css/custom.css" rel="stylesheet"/>
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]>
+    <script th:src="@{/vendor/js/ie8-responsive-file-warning.js}"
+            src="../../static/vendor/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script th:src="@{/vendor/js/ie-emulation-modes-warning.js}"
+            src="../../static/vendor/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Expense Tracker</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">Settings</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Help</a></li>
+            </ul>
+            <form class="navbar-form navbar-right">
+                <input type="text" class="form-control" placeholder="Search..."/>
+            </form>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li><a href="#">Overview</a></li>
+                <li class="active"><a href="list.html" th:href="@{/recurring_expenses}">Recurring Expenses <span class="sr-only">(current)</span></a></li>
+                <li><a href="#">Expenses</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header">Recurring Expense</h1>
+
+            <form>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <input type="text" class="form-control" id="description" placeholder="Label"/>
+                </div>
+                <div class="form-group">
+                    <label for="label">Label</label>
+                    <input type="text" class="form-control" id="label" placeholder="Label"/>
+                </div>
+                <div class="form-group">
+                    <label for="nextDueDate">Next due date</label>
+                    <input type="text" class="form-control" id="nextDueDate" placeholder="dd.mm.yyyy"/>
+                </div>
+                <div class="form-group">
+                    <label for="recurrencePeriod">Recurrence period</label>
+                    <select id="recurrencePeriod" class="form-control">
+                        <option class="nullValue">--- Please select ---</option>
+                        <option>Yearly</option>
+                        <option>Quarterly</option>
+                        <option>Monthly</option>
+                        <option>Weekly</option>
+                        <option>Daily</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="expenseType">Expense type</label>
+                    <select id="expenseType" class="form-control">
+                        <option class="nullValue">--- Please select ---</option>
+                        <option>Membership</option>
+                        <option>Subscription</option>
+                        <option>Insurance</option>
+                        <option>Fee</option>
+                        <option>Tax</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="amount">Amount</label>
+                    <input type="text" class="form-control" id="amount" placeholder="x.xx EUR"/>
+                </div>
+                <div class="form-group">
+                    <label for="creditorName">Creditor</label>
+                    <input type="text" class="form-control" id="creditorName" placeholder="Creditor name"/>
+                </div>
+                <div class="form-group">
+                    <label for="creditorName">Note</label>
+                    <textarea class="form-control" rows="3" id="note"></textarea>
+                </div>
+                <div class="pull-right">
+                    <button type="submit" class="btn btn-default">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script th:remove="all" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+<script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script th:src="@{/vendor/js/ie10-viewport-bug-workaround.js}"
+        src="../../static/vendor/js/ie10-viewport-bug-workaround.js"></script>
+</body>
+</html>
