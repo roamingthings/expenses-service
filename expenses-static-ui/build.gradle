@@ -18,10 +18,12 @@ group = 'de.roamingthings.expenses'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
+ext["thymeleaf.version"] = "3.0.5.RELEASE"
+ext["thymeleaf-layout-dialect.version"] = "2.2.1"
+
 repositories {
 	mavenCentral()
 }
-
 
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-jersey')
