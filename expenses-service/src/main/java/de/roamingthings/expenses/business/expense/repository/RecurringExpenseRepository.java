@@ -8,6 +8,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
  * @author Alexander Sparkowsky [info@roamingthings.de]
  * @version 2017/04/10
  */
-@RepositoryRestResource(collectionResourceRel = "recurring_expenses", path = "recurring_expenses")
+@RepositoryRestResource(path = "recurring_expenses")
 public interface RecurringExpenseRepository extends PagingAndSortingRepository<RecurringExpense, Long> {
 }

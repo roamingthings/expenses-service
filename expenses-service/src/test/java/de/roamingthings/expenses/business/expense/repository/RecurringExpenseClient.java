@@ -89,7 +89,7 @@ public class RecurringExpenseClient extends ExternalResource {
         final Response response = baseTarget.request(MediaType.APPLICATION_JSON_TYPE).get();
         assertStatus(Response.Status.OK, response);
 
-        final JsonArray jsonArray = response.readEntity(JsonObject.class).getJsonObject("_embedded").getJsonArray("recurring_expenses");
+        final JsonArray jsonArray = response.readEntity(JsonObject.class).getJsonObject("_embedded").getJsonArray("recurringExpenses");
         assertThat(jsonArray, notNullValue());
         return jsonArray.getValuesAs(JsonObject.class).stream()
                 .map(o -> o.getJsonObject("_links").getJsonObject("self").getString("href"))
