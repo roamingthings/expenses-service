@@ -26,7 +26,7 @@ public class RecurringExpenseController {
 
     @RequestMapping
     public String editRecurringExpenses(Model model) {
-        final Collection<RecurringExpense> recurringExpenseList = recurringExpenseService.getRecurringExpenseList();
+        final Collection<RecurringExpense> recurringExpenseList = recurringExpenseService.findAllRecurringExpenseSummaries();
         model.addAttribute("recurringExpenseList", recurringExpenseList);
 
         return "/recurring_expenses/list";
@@ -34,6 +34,9 @@ public class RecurringExpenseController {
 
     @RequestMapping(path = "/{id}", method = RequestMethod.GET)
     public String editRecurringExpenses(@PathVariable Long id, Model model) {
+        final RecurringExpense recurringExpense = recurringExpenseService.findRecurringExpense(id);
+        model.addAttribute("recurringExpense", recurringExpense);
+
         return "/recurring_expenses/edit";
     }
 }

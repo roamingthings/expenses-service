@@ -33,11 +33,11 @@
 <form>
     <div class="form-group">
         <label for="description">Description</label>
-        <input type="text" class="form-control" id="description" placeholder="Label"/>
+        <input type="text" class="form-control" id="description" placeholder="Label" th:value="${recurringExpense.description}"/>
     </div>
     <div class="form-group">
         <label for="label">Label</label>
-        <input type="text" class="form-control" id="label" placeholder="Label"/>
+        <input type="text" class="form-control" id="label" placeholder="Label" th:value="${recurringExpense.label}"/>
     </div>
     <div class="form-group">
         <label for="nextDueDate">Next due date</label>

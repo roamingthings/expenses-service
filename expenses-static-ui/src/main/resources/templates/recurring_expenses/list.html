@@ -41,26 +41,16 @@
             <th>Description</th>
             <th>Amount</th>
             <th>Period</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>01.05.2017</td>
-            <td>Magazine Subscription</td>
-            <td>49.99 EUR</td>
-            <td>Yearly</td>
-        </tr>
-        <tr>
-            <td>01.05.2017</td>
-            <td>Electricity</td>
-            <td>67.32 EUR</td>
-            <td>Monthly</td>
-        </tr>
-        <tr>
-            <td>10.05.2017</td>
-            <td>Insurance</td>
-            <td>200.46 EUR</td>
-            <td>Quarterly</td>
+        <tr th:each="expense : ${recurringExpenseList}">
+            <td th:text="${#dates.format(expense.nextDueDate,'dd.MM.yyyy')}">01.05.2017</td>
+            <td th:text="${expense.description}">Electricity</td>
+            <td th:text="${expense.amount} + ' ' + ${expense.currency}">49.99 EUR</td>
+            <td th:text="${expense.recurrencePeriod}">Yearly</td>
+            <td><a href="edit.html" th:href="@{/recurring_expenses/} + ${expense.systemId}" class="btn btn-primary btn-xs">Edit</a></td>
         </tr>
         </tbody>
     </table>

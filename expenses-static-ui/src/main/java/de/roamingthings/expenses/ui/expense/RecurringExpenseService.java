@@ -20,6 +20,7 @@ import java.util.Collection;
 public class RecurringExpenseService {
 
     private static final String URI_RECURRING_EXPENSES_RESOURCE_SUMMARY = "http://localhost:{port}/recurring_expenses?projection=recurringExpenseSummary";
+    private static final String URI_RECURRING_EXPENSE_RESOURCE = "http://localhost:{port}/recurring_expenses/{systemId}";
     private static final Integer PORT = 9191;
 
 
@@ -29,7 +30,7 @@ public class RecurringExpenseService {
         this.restTemplate = restTemplateBuilder.build();
     }
 
-    public Collection<RecurringExpense> getRecurringExpenseList() {
+    public Collection<RecurringExpense> findAllRecurringExpenseSummaries() {
         ResponseEntity<Resources<RecurringExpense>> responseEntity =
                 restTemplate.exchange(
                         URI_RECURRING_EXPENSES_RESOURCE_SUMMARY,
@@ -45,5 +46,9 @@ public class RecurringExpenseService {
         }
 
         return content;
+    }
+
+    public RecurringExpense findRecurringExpense(Long systemId) {
+        return restTemplate.getForObject(URI_RECURRING_EXPENSE_RESOURCE, RecurringExpense.class, PORT, systemId);
     }
 }
