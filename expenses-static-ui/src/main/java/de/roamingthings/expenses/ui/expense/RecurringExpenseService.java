@@ -19,8 +19,8 @@ import java.util.Collection;
 @Service
 public class RecurringExpenseService {
 
-    private static final String URI_RECURRING_EXPENSES_RESOURCE = "http://localhost:{port}/recurring_expenses";
-    private static final int PORT = 9191;
+    private static final String URI_RECURRING_EXPENSES_RESOURCE_SUMMARY = "http://localhost:{port}/recurring_expenses?projection=recurringExpenseSummary";
+    private static final Integer PORT = 9191;
 
 
     private RestTemplate restTemplate;
@@ -32,7 +32,7 @@ public class RecurringExpenseService {
     public Collection<RecurringExpense> getRecurringExpenseList() {
         ResponseEntity<Resources<RecurringExpense>> responseEntity =
                 restTemplate.exchange(
-                        URI_RECURRING_EXPENSES_RESOURCE,
+                        URI_RECURRING_EXPENSES_RESOURCE_SUMMARY,
                         HttpMethod.GET,
                         HttpEntity.EMPTY,
                         new ParameterizedTypeReference<Resources<RecurringExpense>>() {

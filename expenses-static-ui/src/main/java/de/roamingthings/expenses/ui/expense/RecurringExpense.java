@@ -20,6 +20,8 @@ import java.util.Date;
 @ToString
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RecurringExpense extends ResourceSupport {
+    private Long systemId;
+
     @NotNull
     @Size(max = 160)
     private String description;
