@@ -31,6 +31,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-hateoas')
 
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+	compile('org.thymeleaf.extras:thymeleaf-extras-java8time:3.0.0.RELEASE')
     compile('org.webjars:bootstrap:3.3.7-1')
     compile('org.webjars:font-awesome:4.7.0')
 
