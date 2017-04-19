@@ -3,7 +3,9 @@ package de.roamingthings.expenses.ui.expense;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.hateoas.ResourceSupport;
 
 import javax.validation.constraints.NotNull;
@@ -17,6 +19,7 @@ import java.util.Date;
  */
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @ToString
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RecurringExpense extends ResourceSupport {
@@ -30,6 +33,7 @@ public class RecurringExpense extends ResourceSupport {
     private String label;
 
     @NotNull
+    @DateTimeFormat(pattern = "dd.MM.yyyy")
     private Date nextDueDate;
 
     @NotNull

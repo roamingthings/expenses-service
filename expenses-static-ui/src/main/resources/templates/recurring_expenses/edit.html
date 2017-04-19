@@ -30,52 +30,52 @@
 <body>
 <h1 class="page-header">Recurring Expense</h1>
 
-<form>
+<form action="#" th:action="@{/recurring_expenses}" th:object="${recurringExpense}" method="post">
+    <input type="hidden" id="systemId" th:name="systemId" th:value="${systemId}"/>
     <div class="form-group">
         <label for="description">Description</label>
-        <input type="text" class="form-control" id="description" placeholder="Label" th:value="${recurringExpense.description}"/>
+        <input type="text" class="form-control" id="description" placeholder="Label" th:field="*{description}"/>
     </div>
     <div class="form-group">
         <label for="label">Label</label>
-        <input type="text" class="form-control" id="label" placeholder="Label" th:value="${recurringExpense.label}"/>
+        <input type="text" class="form-control" id="label" placeholder="Label" th:field="*{label}"/>
     </div>
     <div class="form-group">
         <label for="nextDueDate">Next due date</label>
-        <input type="text" class="form-control" id="nextDueDate" placeholder="dd.mm.yyyy"/>
+        <input type="text" class="form-control" id="nextDueDate" placeholder="dd.mm.yyyy" th:name="nextDueDate" th:value="*{#dates.format(nextDueDate, 'dd.MM.yyyy')}"/>
     </div>
     <div class="form-group">
         <label for="recurrencePeriod">Recurrence period</label>
-        <select id="recurrencePeriod" class="form-control">
-            <option class="nullValue">--- Please select ---</option>
-            <option>Yearly</option>
-            <option>Quarterly</option>
-            <option>Monthly</option>
-            <option>Weekly</option>
-            <option>Daily</option>
+        <select id="recurrencePeriod" class="form-control" th:field="*{{recurrencePeriod}}">
+            <option th:each="period : ${T(de.roamingthings.expenses.ui.expense.RecurrencePeriod).values()}"
+                    th:selected="${period == T(de.roamingthings.expenses.ui.expense.RecurrencePeriod)}"
+                    th:value="${{period}}"
+                    th:text="${period}">Wireframe</option>
         </select>
     </div>
     <div class="form-group">
         <label for="expenseType">Expense type</label>
-        <select id="expenseType" class="form-control">
-            <option class="nullValue">--- Please select ---</option>
-            <option>Membership</option>
-            <option>Subscription</option>
-            <option>Insurance</option>
-            <option>Fee</option>
-            <option>Tax</option>
+        <select id="expenseType" class="form-control" th:field="*{{expenseType}}">
+            <option th:each="type : ${T(de.roamingthings.expenses.ui.expense.ExpenseType).values()}"
+                    th:selected="${type == T(de.roamingthings.expenses.ui.expense.ExpenseType)}"
+                    th:value="${{type}}"
+                    th:text="${type}">Wireframe</option>
         </select>
     </div>
     <div class="form-group">
         <label for="amount">Amount</label>
-        <input type="text" class="form-control" id="amount" placeholder="x.xx EUR"/>
+        <div class="input-group">
+            <input type="text" class="form-control" id="amount" placeholder="x.xx EUR" th:field="*{amount}"/>
+            <input type="text" class="input-group-addon form-control" id="currency" placeholder="EUR" th:field="*{currency}"/>
+        </div>
     </div>
     <div class="form-group">
         <label for="creditorName">Creditor</label>
-        <input type="text" class="form-control" id="creditorName" placeholder="Creditor name"/>
+        <input type="text" class="form-control" id="creditorName" placeholder="Creditor name" th:field="*{creditorName}"/>
     </div>
     <div class="form-group">
         <label for="creditorName">Note</label>
-        <textarea class="form-control" rows="3" id="note"></textarea>
+        <textarea class="form-control" rows="3" id="note" th:field="*{note}"></textarea>
     </div>
     <div class="pull-right">
         <button type="submit" class="btn btn-default">Cancel</button>

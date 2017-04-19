@@ -32,10 +32,17 @@ public class RecurringExpenseController {
         return "/recurring_expenses/list";
     }
 
+    @RequestMapping(method = RequestMethod.POST)
+    public String postRecurringExpenses(RecurringExpense expense, Long systemId, Model model) {
+        recurringExpenseService.update(expense, systemId);
+        return "redirect:/recurring_expenses";
+    }
+
     @RequestMapping(path = "/{id}", method = RequestMethod.GET)
     public String editRecurringExpenses(@PathVariable Long id, Model model) {
         final RecurringExpense recurringExpense = recurringExpenseService.findRecurringExpense(id);
         model.addAttribute("recurringExpense", recurringExpense);
+        model.addAttribute("systemId", id);
 
         return "/recurring_expenses/edit";
     }
