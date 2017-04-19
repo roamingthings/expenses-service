@@ -51,4 +51,8 @@ public class RecurringExpenseService {
     public RecurringExpense findRecurringExpense(Long systemId) {
         return restTemplate.getForObject(URI_RECURRING_EXPENSE_RESOURCE, RecurringExpense.class, PORT, systemId);
     }
+
+    public void update(RecurringExpense expense, Long systemId) {
+        restTemplate.put(URI_RECURRING_EXPENSE_RESOURCE, expense, PORT, systemId);
+    }
 }
