@@ -35,14 +35,12 @@ dependencies {
     compile('org.webjars:bootstrap:3.3.7-1')
     compile('org.webjars:font-awesome:4.7.0')
 
-    compile('org.springframework.boot:spring-boot-starter-validation')
+//    compile('org.springframework.boot:spring-boot-starter-validation')
+    compile("org.hibernate:hibernate-validator")
 
 	compileOnly('org.projectlombok:lombok')
 
 	runtime('org.springframework.boot:spring-boot-devtools')
 
 	testCompile('org.springframework.boot:spring-boot-starter-test')
-	testCompile('org.glassfish.jersey.core:jersey-client:2.25')
-    testCompile('org.glassfish.jersey.media:jersey-media-json-processing:2.25')
-    testCompile('org.glassfish:javax.json:1.0.4')
 }

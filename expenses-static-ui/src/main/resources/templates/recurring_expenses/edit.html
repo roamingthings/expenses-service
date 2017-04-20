@@ -31,18 +31,34 @@
 <h1 class="page-header">Recurring Expense</h1>
 
 <form action="#" th:action="@{/recurring_expenses}" th:object="${recurringExpense}" method="post">
-    <input type="hidden" id="systemId" th:name="systemId" th:value="${systemId}"/>
+    <input type="hidden" id="systemId" th:name="systemId" th:field="*{systemId}"/>
     <div class="form-group">
         <label for="description">Description</label>
-        <input type="text" class="form-control" id="description" placeholder="Label" th:field="*{description}"/>
+        <input type="text" class="form-control" id="description" placeholder="Description" th:field="*{description}"/>
+        <span class="help-block" th:if="${#fields.hasErrors('description')}">
+               <ul>
+                   <li th:each="err : ${#fields.errors('description')}" th:text="${err}"/>
+               </ul>
+        </span>
     </div>
     <div class="form-group">
         <label for="label">Label</label>
         <input type="text" class="form-control" id="label" placeholder="Label" th:field="*{label}"/>
+        <span class="help-block" th:if="${#fields.hasErrors('label')}">
+               <ul>
+                   <li th:each="err : ${#fields.errors('label')}" th:text="${err}"/>
+               </ul>
+        </span>
     </div>
     <div class="form-group">
         <label for="nextDueDate">Next due date</label>
-        <input type="text" class="form-control" id="nextDueDate" placeholder="dd.mm.yyyy" th:name="nextDueDate" th:value="*{#dates.format(nextDueDate, 'dd.MM.yyyy')}"/>
+        <input type="text" class="form-control" id="nextDueDate" placeholder="dd.mm.yyyy" th:name="nextDueDate"
+               th:value="*{#dates.format(nextDueDate, 'dd.MM.yyyy')}"/>
+        <span class="help-block" th:if="${#fields.hasErrors('nextDueDate')}">
+               <ul>
+                   <li th:each="err : ${#fields.errors('nextDueDate')}" th:text="${err}"/>
+               </ul>
+        </span>
     </div>
     <div class="form-group">
         <label for="recurrencePeriod">Recurrence period</label>
@@ -50,8 +66,14 @@
             <option th:each="period : ${T(de.roamingthings.expenses.ui.expense.RecurrencePeriod).values()}"
                     th:selected="${period == T(de.roamingthings.expenses.ui.expense.RecurrencePeriod)}"
                     th:value="${{period}}"
-                    th:text="${period}">Wireframe</option>
+                    th:text="${period}">Wireframe
+            </option>
         </select>
+        <span class="help-block" th:if="${#fields.hasErrors('recurrencePeriod')}">
+               <ul>
+                   <li th:each="err : ${#fields.errors('recurrencePeriod')}" th:text="${err}"/>
+               </ul>
+        </span>
     </div>
     <div class="form-group">
         <label for="expenseType">Expense type</label>
@@ -59,23 +81,51 @@
             <option th:each="type : ${T(de.roamingthings.expenses.ui.expense.ExpenseType).values()}"
                     th:selected="${type == T(de.roamingthings.expenses.ui.expense.ExpenseType)}"
                     th:value="${{type}}"
-                    th:text="${type}">Wireframe</option>
+                    th:text="${type}">Wireframe
+            </option>
         </select>
+        <span class="help-block" th:if="${#fields.hasErrors('expenseType')}">
+               <ul>
+                   <li th:each="err : ${#fields.errors('expenseType')}" th:text="${err}"/>
+               </ul>
+        </span>
     </div>
     <div class="form-group">
         <label for="amount">Amount</label>
         <div class="input-group">
             <input type="text" class="form-control" id="amount" placeholder="x.xx EUR" th:field="*{amount}"/>
-            <input type="text" class="input-group-addon form-control" id="currency" placeholder="EUR" th:field="*{currency}"/>
+            <input type="text" class="input-group-addon form-control" id="currency" placeholder="EUR"
+                   th:field="*{currency}"/>
         </div>
+        <span class="help-block" th:if="${#fields.hasErrors('amount')}">
+               <ul>
+                   <li th:each="err : ${#fields.errors('amount')}" th:text="${err}"/>
+               </ul>
+        </span>
+        <span class="help-block" th:if="${#fields.hasErrors('currency')}">
+               <ul>
+                   <li th:each="err : ${#fields.errors('currency')}" th:text="${err}"/>
+               </ul>
+        </span>
     </div>
     <div class="form-group">
         <label for="creditorName">Creditor</label>
-        <input type="text" class="form-control" id="creditorName" placeholder="Creditor name" th:field="*{creditorName}"/>
+        <input type="text" class="form-control" id="creditorName" placeholder="Creditor name"
+               th:field="*{creditorName}"/>
+        <span class="help-block" th:if="${#fields.hasErrors('creditorName')}">
+               <ul>
+                   <li th:each="err : ${#fields.errors('creditorName')}" th:text="${err}"/>
+               </ul>
+        </span>
     </div>
     <div class="form-group">
-        <label for="creditorName">Note</label>
+        <label for="note">Note</label>
         <textarea class="form-control" rows="3" id="note" th:field="*{note}"></textarea>
+        <span class="help-block" th:if="${#fields.hasErrors('note')}">
+               <ul>
+                   <li th:each="err : ${#fields.errors('note')}" th:text="${err}"/>
+               </ul>
+        </span>
     </div>
     <div class="pull-right">
         <button type="submit" class="btn btn-default">Cancel</button>

@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.hateoas.ResourceSupport;
 
@@ -26,6 +27,7 @@ public class RecurringExpense extends ResourceSupport {
     private Long systemId;
 
     @NotNull
+    @NotEmpty
     @Size(max = 160)
     private String description;
 
