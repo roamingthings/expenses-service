@@ -32,41 +32,42 @@ public class RecurringExpense implements Creatable, Modifiable {
     private int version;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "created_at")
+    @Column(name = "created_at", nullable=false, updatable = false)
     private Date createdAt;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "modified_at")
+    @Column(name = "modified_at", nullable=false)
     private Date modifiedAt;
 
     @NotNull
-    @Size(max = 160)
-    @Column(length = 160)
+    @Size(min = 1, max = 160)
+    @Column(nullable=false, length = 160)
     private String description;
 
     @Column(length = 160)
     private String label;
 
     @NotNull
-    @Column(name = "next_due_date")
+    @Column(name = "next_due_date", nullable=false)
     @Temporal(TemporalType.DATE)
     private Date nextDueDate;
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "recurrence_period", length = 80)
+    @Column(name = "recurrence_period", length = 80, nullable=false)
     private RecurrencePeriod recurrencePeriod;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "expense_type", length = 80)
+    @Column(name = "expense_type", length = 80, nullable=false)
     private ExpenseType expenseType;
 
     @NotNull
+    @Column(nullable=false)
     private BigDecimal amount;
 
     @NotNull
     @Size(max = 3)
-    @Column(length = 3)
+    @Column(length = 3, nullable=false)
     private String currency;
 
     @Size(max = 160)
