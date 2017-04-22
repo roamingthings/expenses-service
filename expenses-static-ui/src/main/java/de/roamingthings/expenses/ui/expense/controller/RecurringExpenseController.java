@@ -1,14 +1,11 @@
-package de.roamingthings.expenses.ui.expenses.web;
+package de.roamingthings.expenses.ui.expense.controller;
 
 import de.roamingthings.expenses.ui.expense.RecurringExpense;
 import de.roamingthings.expenses.ui.expense.RecurringExpenseService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Collection;
@@ -27,7 +24,7 @@ public class RecurringExpenseController {
         this.recurringExpenseService = recurringExpenseService;
     }
 
-    @RequestMapping
+    @GetMapping
     public String editRecurringExpenses(Model model) {
         final Collection<RecurringExpense> recurringExpenseList = recurringExpenseService.findAllRecurringExpenseSummaries();
         model.addAttribute("recurringExpenseList", recurringExpenseList);
@@ -35,7 +32,7 @@ public class RecurringExpenseController {
         return "/recurring_expenses/list";
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @PostMapping
     public String postRecurringExpenses(@Valid @ModelAttribute RecurringExpense expense, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "/recurring_expenses/edit";
@@ -45,7 +42,7 @@ public class RecurringExpenseController {
         return "redirect:/recurring_expenses";
     }
 
-    @RequestMapping(path = "/{id}", method = RequestMethod.GET)
+    @GetMapping("/{id}")
     public String editRecurringExpenses(@PathVariable Long id, Model model) {
         final RecurringExpense recurringExpense = recurringExpenseService.findRecurringExpense(id);
         recurringExpense.setSystemId(id);
