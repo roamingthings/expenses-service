@@ -25,7 +25,7 @@
 <body>
 <div layout:fragment="content">
     <h1 class="page-header">Recurring Expense</h1>
-    <form action="#" th:action="@{/recurring_expenses}" th:object="${recurringExpense}" method="post">
+    <form th:id="expense" action="#" th:action="@{/recurring_expenses}" th:object="${recurringExpense}" method="post">
         <input type="hidden" id="systemId" th:name="systemId" th:field="*{systemId}"/>
 
         <div layout:insert="~{fragments/inputfield :: formControl(fieldId='description', fieldRef=*{description}, placeholder='Description', required=true)}" th:remove="tag">
