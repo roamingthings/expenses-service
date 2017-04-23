@@ -25,7 +25,7 @@ public class RecurringExpenseController {
     }
 
     @GetMapping
-    public String editRecurringExpenses(Model model) {
+    public String listRecurringExpenses(Model model) {
         final Collection<RecurringExpense> recurringExpenseList = recurringExpenseService.findAllRecurringExpenseSummaries();
         model.addAttribute("recurringExpenseList", recurringExpenseList);
 
