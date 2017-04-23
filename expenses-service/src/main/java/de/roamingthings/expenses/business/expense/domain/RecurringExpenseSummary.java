@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.rest.core.config.Projection;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * @author Alexander Sparkowsky [info@roamingthings.de]
@@ -18,7 +18,7 @@ public interface RecurringExpenseSummary {
 
     String getDescription();
 
-    Date getNextDueDate();
+    LocalDate getNextDueDate();
 
     BigDecimal getAmount();
 

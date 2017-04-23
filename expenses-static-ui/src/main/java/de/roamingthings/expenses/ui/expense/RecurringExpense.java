@@ -1,6 +1,10 @@
 package de.roamingthings.expenses.ui.expense;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,7 +16,7 @@ import org.springframework.hateoas.ResourceSupport;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * @author Alexander Sparkowsky [info@roamingthings.de]
@@ -36,7 +40,9 @@ public class RecurringExpense extends ResourceSupport {
 
     @NotNull
     @DateTimeFormat(pattern = "dd.MM.yyyy")
-    private Date nextDueDate;
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
+    private LocalDate nextDueDate;
 
     @NotNull
     private RecurrencePeriod recurrencePeriod;

@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * @author Alexander Sparkowsky [info@roamingthings.de]
@@ -30,7 +30,7 @@ public class ExpensesServiceApplication {
             RecurringExpense expense1 =
                     new RecurringExpense("Recurring Payment 1",
                             "testpayment",
-                            new Date(),
+                            LocalDate.now(),
                             RecurrencePeriod.YEARLY,
                             ExpenseType.SUBSCRIPTION,
                             BigDecimal.valueOf(1.23),
@@ -42,7 +42,7 @@ public class ExpensesServiceApplication {
             RecurringExpense expense2 =
                     new RecurringExpense("Recurring Payment 2",
                             "testpayment",
-                            new Date(),
+                            LocalDate.now(),
                             RecurrencePeriod.MONTHLY,
                             ExpenseType.SUBSCRIPTION,
                             BigDecimal.valueOf(4.56),

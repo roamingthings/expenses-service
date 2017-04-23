@@ -11,6 +11,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -49,8 +50,7 @@ public class RecurringExpense implements Creatable, Modifiable {
 
     @NotNull
     @Column(name = "next_due_date", nullable=false)
-    @Temporal(TemporalType.DATE)
-    private Date nextDueDate;
+    private LocalDate nextDueDate;
 
     @NotNull
     @Enumerated(EnumType.STRING)
@@ -81,7 +81,7 @@ public class RecurringExpense implements Creatable, Modifiable {
     public RecurringExpense(
             String description,
             String label,
-            Date nextDueDate,
+            LocalDate nextDueDate,
             RecurrencePeriod recurrencePeriod,
             ExpenseType expenseType,
             BigDecimal amount,

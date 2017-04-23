@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{fragments/layout}"
+      layout:decorate="~{layout/default}"
       th:with="menu='recurring_expenses'">
 <head>
 
@@ -41,7 +41,7 @@
             <span layout:fragment="label-content">Next due date</span>
             <span layout:fragment="input-content">
                 <input type="text" class="form-control" id="nextDueDate" placeholder="dd.mm.yyyy" th:name="nextDueDate"
-                       th:value="*{#dates.format(nextDueDate, 'dd.MM.yyyy')}"/>
+                       th:value="*{#temporals.format(nextDueDate, 'dd.MM.yyyy')}"/>
             </span>
         </div>
 

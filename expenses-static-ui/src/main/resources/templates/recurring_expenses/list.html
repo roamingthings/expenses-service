@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{fragments/layout}"
+      layout:decorate="~{layout/default}"
       th:with="menu='recurring_expenses'">
 <head>
 
@@ -42,7 +42,7 @@
             </thead>
             <tbody>
             <tr th:each="expense : ${recurringExpenseList}">
-                <td th:text="${#dates.format(expense.nextDueDate,'dd.MM.yyyy')}">01.05.2017</td>
+                <td th:text="${#temporals.format(expense.nextDueDate,'dd.MM.yyyy')}">01.05.2017</td>
                 <td th:text="${expense.description}">Electricity</td>
                 <td th:text="${expense.amount} + ' ' + ${expense.currency}">49.99 EUR</td>
                 <td th:text="${expense.recurrencePeriod}">Yearly</td>

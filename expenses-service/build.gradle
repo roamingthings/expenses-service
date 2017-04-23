@@ -30,6 +30,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-jersey')
 
     compile('org.springframework.boot:spring-boot-starter-validation')
+	compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310')
 
 	runtime('com.h2database:h2')
 	runtime('org.postgresql:postgresql')
