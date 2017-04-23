@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: expenses-mono
+  profiles:
+    active: dev
+  jpa:
+    hibernate:
+      ddl-auto: none
+  jackson:
+    serialization:
+      write_dates_as_timestamps: false
+server:
+  port: 8080

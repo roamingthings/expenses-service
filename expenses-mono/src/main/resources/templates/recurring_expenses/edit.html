@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}"
+      th:with="menu='recurring_expenses'">
+<head>
+
+    <title>Expense Tracker :: Edit Recurring Expense</title>
+
+    <th:block th:remove="all">
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+              crossorigin="anonymous"/>
+        <script src="https://use.fontawesome.com/c2480015ef.js"></script>
+
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <link href="../../static/vendor/css/ie10-viewport-bug-workaround.css" rel="stylesheet"/>
+
+        <!-- Custom styles for this template -->
+        <link href="../../static/assets/css/custom.css" rel="stylesheet"/>
+    </th:block>
+</head>
+
+<body>
+<div layout:fragment="content">
+    <h1 class="page-header">Recurring Expense</h1>
+    <form th:id="expense" action="#" th:action="@{/recurring_expenses}" th:object="${recurringExpense}" method="post">
+        <input type="hidden" id="id" th:name="id" th:field="*{id}"/>
+
+        <div layout:insert="~{fragments/inputfield :: formControl(fieldId='description', fieldRef=*{description}, placeholder='Description', required=true)}" th:remove="tag">
+            <span layout:fragment="label-content">Description</span>
+
+        </div>
+
+        <div layout:insert="~{fragments/inputfield :: formControl(fieldId='label', fieldRef=*{label}, placeholder='Label', required=false)}" th:remove="tag">
+            <span layout:fragment="label-content">Label</span>
+        </div>
+
+        <div layout:insert="~{fragments/inputfield :: formControl(fieldId='nextDueDate', fieldRef=*{nextDueDate}, placeholder='Next due date', required=true)}" th:remove="tag">
+            <span layout:fragment="label-content">Next due date</span>
+            <span layout:fragment="input-content">
+                <input type="text" class="form-control" id="nextDueDate" placeholder="dd.mm.yyyy" th:name="nextDueDate"
+                       th:value="*{#temporals.format(nextDueDate, 'dd.MM.yyyy')}"/>
+            </span>
+        </div>
+
+
+        <div layout:insert="~{fragments/inputfield :: formControl(fieldId='recurrencePeriod', fieldRef=*{recurrencePeriod}, placeholder='Recurrence period', required=true)}" th:remove="tag">
+            <span layout:fragment="label-content">Recurrence period</span>
+            <span layout:fragment="input-content">
+                <select id="recurrencePeriod" class="form-control" th:field="*{{recurrencePeriod}}">
+                    <option th:each="period : ${T(de.roamingthings.expenses.business.expense.domain..RecurrencePeriod).values()}"
+                            th:selected="${period == T(de.roamingthings.expenses.business.expense.domain.RecurrencePeriod)}"
+                            th:value="${{period}}"
+                            th:text="#{${'recurrencePeriod.' + period}}">Wireframe
+                    </option>
+                </select>
+            </span>
+        </div>
+
+        <div layout:insert="~{fragments/inputfield :: formControl(fieldId='expenseType', fieldRef=*{expenseType}, placeholder='Expense type', required=true)}" th:remove="tag">
+            <span layout:fragment="label-content">Expense type</span>
+            <span layout:fragment="input-content">
+                <select id="expenseType" class="form-control" th:field="*{{expenseType}}">
+                    <option th:each="expenseType : ${T(de.roamingthings.expenses.business.expense.domain..ExpenseType).values()}"
+                            th:selected="${expenseType == T(de.roamingthings.expenses.business.expense.domain.ExpenseType)}"
+                            th:value="${{expenseType}}"
+                            th:text="#{${'expenseType.' + expenseType}}">Wireframe
+                    </option>
+                </select>
+            </span>
+        </div>
+
+        <div class="form-group" th:classappend="${#fields.hasErrors('amount')}? has-error">
+            <label for="amount" class="control-label">Amount</label>
+            <div class="input-group">
+                <input type="text" class="form-control" id="amount" placeholder="x.xx EUR" th:field="*{amount}"/>
+                <input type="text" class="input-group-addon form-control" id="currency" placeholder="EUR"
+                       th:field="*{currency}"/>
+            </div>
+            <span class="help-block" th:if="${#fields.hasErrors('amount')}">
+           <div th:each="err : ${#fields.errors('amount')}" th:text="${err}"/>
+        </span>
+            <span class="help-block" th:if="${#fields.hasErrors('currency')}">
+           <div th:each="err : ${#fields.errors('currency')}" th:text="${err}"/>
+        </span>
+        </div>
+
+        <div layout:insert="~{fragments/inputfield :: formControl(fieldId='creditorName', fieldRef=*{creditorName}, placeholder='Creditor name', required=false)}" th:remove="tag">
+            <span layout:fragment="label-content">Creditor name</span>
+        </div>
+
+        <div layout:insert="~{fragments/inputfield :: formControl(fieldId='note', fieldRef=*{note}, placeholder='Note', required=false)}" th:remove="tag">
+            <span layout:fragment="label-content">Note</span>
+            <span layout:fragment="input-content">
+                <textarea class="form-control" rows="2" id="note" th:field="*{note}"></textarea>
+            </span>
+        </div>
+
+        <div class="pull-right">
+            <a th:href="@{/recurring_expenses}" class="btn btn-default">Cancel</a>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

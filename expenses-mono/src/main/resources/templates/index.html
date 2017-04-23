@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}"
+      th:with="menu='overview'">
+<head>
+
+    <title>Expense Tracker :: Overview</title>
+
+    <th:block th:remove="all">
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+        <script src="https://use.fontawesome.com/c2480015ef.js"></script>
+
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <link href="../static/vendor/css/ie10-viewport-bug-workaround.css" rel="stylesheet"/>
+
+        <!-- Custom styles for this template -->
+        <link href="../static/assets/css/custom.css" rel="stylesheet"/>
+    </th:block>
+</head>
+
+<body>
+<div layout:fragment="content">
+    <h1 class="page-header">Overview</h1>
+
+    <h2 class="sub-header">Next Recurring Expenses</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Due Date</th>
+                <th>Description</th>
+                <th>Amount</th>
+                <th>Period</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>01.05.2017</td>
+                <td>Magazine Subscription</td>
+                <td>49.99 EUR</td>
+                <td>Yearly</td>
+            </tr>
+            <tr>
+                <td>01.05.2017</td>
+                <td>Electricity</td>
+                <td>67.32 EUR</td>
+                <td>Monthly</td>
+            </tr>
+            <tr>
+                <td>10.05.2017</td>
+                <td>Insurance</td>
+                <td>200.46 EUR</td>
+                <td>Quarterly</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2 class="sub-header">Last Expenses</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Transaction Date</th>
+                <th>Description</th>
+                <th>Amount</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>15.04.2017</td>
+                <td>Awesome Online Shop</td>
+                <td>19.99 EUR</td>
+            </tr>
+            <tr>
+                <td>12.04.2017</td>
+                <td>Grocerfriend</td>
+                <td>10.45 EUR</td>
+            </tr>
+            <tr>
+                <td>12.04.2017</td>
+                <td>Grocerfriend</td>
+                <td>10.45 EUR</td>
+            </tr>
+            <tr>
+                <td>12.04.2017</td>
+                <td>Grocerfriend</td>
+                <td>10.45 EUR</td>
+            </tr>
+            <tr>
+                <td>12.04.2017</td>
+                <td>Grocerfriend</td>
+                <td>10.45 EUR</td>
+            </tr>
+            <tr>
+                <td>12.04.2017</td>
+                <td>Grocerfriend</td>
+                <td>10.45 EUR</td>
+            </tr>
+            <tr>
+                <td>12.04.2017</td>
+                <td>Grocerfriend</td>
+                <td>10.45 EUR</td>
+            </tr>
+            <tr>
+                <td>12.04.2017</td>
+                <td>Grocerfriend</td>
+                <td>10.45 EUR</td>
+            </tr>
+            <tr>
+                <td>12.04.2017</td>
+                <td>Grocerfriend</td>
+                <td>10.45 EUR</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
