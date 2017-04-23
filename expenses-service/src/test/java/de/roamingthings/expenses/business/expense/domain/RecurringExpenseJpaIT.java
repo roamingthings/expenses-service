@@ -8,7 +8,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.lessThan;
@@ -53,7 +53,7 @@ public class RecurringExpenseJpaIT {
         return new RecurringExpense(
                     "Test description",
                     "label",
-                    new Date(),
+                    LocalDate.now(),
                     RecurrencePeriod.MONTHLY,
                     ExpenseType.SUBSCRIPTION,
                     BigDecimal.valueOf(1.23),
