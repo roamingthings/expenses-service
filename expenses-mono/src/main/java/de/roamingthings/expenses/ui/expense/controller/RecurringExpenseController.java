@@ -29,13 +29,13 @@ public class RecurringExpenseController {
         final Iterable<RecurringExpense> recurringExpenseList = recurringExpenseService.findAllRecurringExpenseSummaries();
         model.addAttribute("recurringExpenseList", recurringExpenseList);
 
-        return "/recurring_expenses/list";
+        return "recurring_expenses/list";
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public String updateRecurringExpenses(@Valid @ModelAttribute RecurringExpense formExpenseModel, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "/recurring_expenses/recurring_expenses_form";
+            return "recurring_expenses/recurring_expenses_form";
         }
 
         if (formExpenseModel.getId() != null) {
@@ -56,7 +56,7 @@ public class RecurringExpenseController {
             recurringExpenseService.save(formExpenseModel);
         }
 
-        return "redirect:/recurring_expenses";
+        return "redirect:recurring_expenses";
     }
 
     @RequestMapping(path = "/details/{id}", method = RequestMethod.GET)
@@ -64,7 +64,7 @@ public class RecurringExpenseController {
         final RecurringExpense recurringExpense = recurringExpenseService.findRecurringExpense(id);
         model.addAttribute("recurringExpense", recurringExpense);
 
-        return "/recurring_expenses/recurring_expenses_form";
+        return "recurring_expenses/recurring_expenses_form";
     }
 
     @RequestMapping(path = "/new", method = RequestMethod.GET)
@@ -73,6 +73,6 @@ public class RecurringExpenseController {
         recurringExpense.setNextDueDate(LocalDate.now());
         model.addAttribute("recurringExpense", recurringExpense);
 
-        return "/recurring_expenses/recurring_expenses_form";
+        return "recurring_expenses/recurring_expenses_form";
     }
 }
