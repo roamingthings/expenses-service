@@ -29,7 +29,7 @@ public class RecurringExpenseServiceImpl implements RecurringExpenseService {
     }
 
     @Override
-    public void update(RecurringExpense expense) {
+    public void save(RecurringExpense expense) {
         recurringExpenseRepository.save(expense);
     }
 }

@@ -11,5 +11,5 @@ public interface RecurringExpenseService {
 
     RecurringExpense findRecurringExpense(Long id);
 
-    void update(RecurringExpense expense);
+    void save(RecurringExpense expense);
 }

@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 
 /**
  * @author Alexander Sparkowsky [info@roamingthings.de]
@@ -34,30 +35,44 @@ public class RecurringExpenseController {
     @RequestMapping(method = RequestMethod.POST)
     public String updateRecurringExpenses(@Valid @ModelAttribute RecurringExpense formExpenseModel, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "/recurring_expenses/edit";
+            return "/recurring_expenses/recurring_expenses_form";
         }
 
-        final RecurringExpense currentRecurringExpense = recurringExpenseService.findRecurringExpense(formExpenseModel.getId());
-        currentRecurringExpense.setDescription(formExpenseModel.getDescription());
-        currentRecurringExpense.setLabel(formExpenseModel.getLabel());
-        currentRecurringExpense.setNextDueDate(formExpenseModel.getNextDueDate());
-        currentRecurringExpense.setRecurrencePeriod(formExpenseModel.getRecurrencePeriod());
-        currentRecurringExpense.setExpenseType(formExpenseModel.getExpenseType());
-        currentRecurringExpense.setAmount(formExpenseModel.getAmount());
-        currentRecurringExpense.setCurrency(formExpenseModel.getCurrency());
-        currentRecurringExpense.setCreditorName(formExpenseModel.getCreditorName());
-        currentRecurringExpense.setNote(formExpenseModel.getNote());
+        if (formExpenseModel.getId() != null) {
 
-        recurringExpenseService.update(currentRecurringExpense
-        );
+            final RecurringExpense currentRecurringExpense = recurringExpenseService.findRecurringExpense(formExpenseModel.getId());
+            currentRecurringExpense.setDescription(formExpenseModel.getDescription());
+            currentRecurringExpense.setLabel(formExpenseModel.getLabel());
+            currentRecurringExpense.setNextDueDate(formExpenseModel.getNextDueDate());
+            currentRecurringExpense.setRecurrencePeriod(formExpenseModel.getRecurrencePeriod());
+            currentRecurringExpense.setExpenseType(formExpenseModel.getExpenseType());
+            currentRecurringExpense.setAmount(formExpenseModel.getAmount());
+            currentRecurringExpense.setCurrency(formExpenseModel.getCurrency());
+            currentRecurringExpense.setCreditorName(formExpenseModel.getCreditorName());
+            currentRecurringExpense.setNote(formExpenseModel.getNote());
+
+            recurringExpenseService.save(currentRecurringExpense);
+        } else {
+            recurringExpenseService.save(formExpenseModel);
+        }
+
         return "redirect:/recurring_expenses";
     }
 
-    @GetMapping("/{id}")
+    @RequestMapping(path = "/details/{id}", method = RequestMethod.GET)
     public String editRecurringExpenses(@PathVariable Long id, Model model) {
         final RecurringExpense recurringExpense = recurringExpenseService.findRecurringExpense(id);
         model.addAttribute("recurringExpense", recurringExpense);
 
-        return "/recurring_expenses/edit";
+        return "/recurring_expenses/recurring_expenses_form";
+    }
+
+    @RequestMapping(path = "/new", method = RequestMethod.GET)
+    public String newRecurringExpenses(Model model) {
+        final RecurringExpense recurringExpense = new RecurringExpense();
+        recurringExpense.setNextDueDate(LocalDate.now());
+        model.addAttribute("recurringExpense", recurringExpense);
+
+        return "/recurring_expenses/recurring_expenses_form";
     }
 }
