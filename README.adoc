@@ -46,6 +46,30 @@ In order to also let IntelliJ build the project in this situation you have to en
 
 TIP: After opening the registry you can easily find the option by start typing it. This will initiate a search/filter functionality within the dialog.
 
+## Docker images
+
+During the gradle build a docker image is build and then pushed to a local registry that is reachable on `localhost` at port `5000`.
+
+A registry can be started in a docker container:
+
+----
+$ docker run -d -p 5000:5000 --name registry registry:2
+----
+
+## Container and orchestration with docker
+
+The folder `orchestration` contains a `docker-compose` configuration to start the application, a PostgreSQL database and a haproxy for load balancing.
+
+To deploy the stack docker has to be running in swarm mode
+
+----
+$ docker swarm init
+----
+
+The stack can then be started by using `deploy.sh` in the `orchestration` folder.
+
+To undeploy issue the `undeploy.sh` command.
+
 ## Useful links
 
 http://www.baeldung.com/database-auditing-jpa[Baeldung: Auditing with JPA, Hibernate, and Spring Data JPA]
