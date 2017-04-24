@@ -61,6 +61,10 @@ dependencies {
 	runtime('org.springframework.boot:spring-boot-devtools')
 }
 
+test {
+    systemProperty("spring.profiles.active", project.properties.get("springTestProfile")?:'test')
+}
+
 task buildDocker(type: Docker, dependsOn: build) {
     registry = project.ext['docker.registry']
     push = true
