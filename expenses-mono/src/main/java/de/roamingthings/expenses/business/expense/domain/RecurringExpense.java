@@ -10,6 +10,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.envers.Audited;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -28,6 +29,7 @@ import java.util.Date;
 @EqualsAndHashCode
 @NoArgsConstructor
 @Entity
+@Audited
 @Table(name = "recurring_expense")
 public class RecurringExpense implements Creatable, Modifiable {
     @Id

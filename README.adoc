@@ -45,3 +45,7 @@ In order to also let IntelliJ build the project in this situation you have to en
 * Enable the option `compiler.automake.allow.when.app.running`
 
 TIP: After opening the registry you can easily find the option by start typing it. This will initiate a search/filter functionality within the dialog.
+
+## Useful links
+
+http://www.baeldung.com/database-auditing-jpa[Baeldung: Auditing with JPA, Hibernate, and Spring Data JPA]
