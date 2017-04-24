@@ -28,9 +28,9 @@
 
     <div class="table-responsive">
         <div class="pull-right">
-            <a href="edit.html" th:href="@{/recurring_expenses/123}" class="btn btn-primary btn-xs">Add</a>
+            <a href="recurring_expenses_form.html.html" th:href="@{/recurring_expenses/new}" class="btn btn-primary btn-xs"><i class="fa fa-plus" ></i> Add</a>
         </div>
-        <table class="table table-striped">
+        <table id="expenses-table" class="table table-striped">
             <thead>
             <tr>
                 <th>Due Date</th>
@@ -41,17 +41,23 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="expense : ${recurringExpenseList}">
-                <td th:text="${#temporals.format(expense.nextDueDate,'dd.MM.yyyy')}">01.05.2017</td>
+            <tr th:each="expense : ${recurringExpenseList}" >
+                <td th:href="@{/recurring_expenses/details/} + ${expense.id}" th:text="${#temporals.format(expense.nextDueDate,'dd.MM.yyyy')}">01.05.2017</td>
                 <td th:text="${expense.description}">Electricity</td>
                 <td th:text="${expense.amount} + ' ' + ${expense.currency}">49.99 EUR</td>
                 <td th:text="${expense.recurrencePeriod}">Yearly</td>
-                <td><a href="edit.html" th:href="@{/recurring_expenses/} + ${expense.id}"
-                       class="btn btn-primary btn-xs">Edit</a></td>
+                <td class="actions" ><a href="recurring_expense_form.html" th:href="@{/recurring_expenses/details/} + ${expense.id}"
+                       class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Edit</a></td>
             </tr>
             </tbody>
         </table>
     </div>
 </div>
+<script layout:fragment="page-script">
+    $("#expenses-table tr").click(function() {
+        window.location = $(this).find('td:eq(0)').attr("href");
+    });
+</script>
+
 </body>
 </html>
