@@ -110,3 +110,10 @@ body {
 .nullValue {
     font-style: italic;
 }
+
+/*
+ * Tables
+ */
+td.actions {
+    text-align: right;
+}
