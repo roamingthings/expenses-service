@@ -10,4 +10,5 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
  */
 @RepositoryRestResource(path = "recurring_expenses")
 public interface RecurringExpenseRepository extends PagingAndSortingRepository<RecurringExpense, Long> {
+    RecurringExpense findByDescription(String description);
 }
