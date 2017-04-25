@@ -65,6 +65,7 @@ public class RecurringExpenseJpaIT {
                     BigDecimal.valueOf(1.23),
                     "EUR",
                     "Creditor",
+                    "Ref12345",
                     "Note");
     }
 

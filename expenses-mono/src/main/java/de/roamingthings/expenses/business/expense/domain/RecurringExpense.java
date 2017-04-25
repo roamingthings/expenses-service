@@ -84,6 +84,10 @@ public class RecurringExpense implements Creatable, Modifiable {
     @Column(name = "creditor_name", length = 160)
     private String creditorName;
 
+    @Size(max = 80)
+    @Column(name = "reference_number", length = 80)
+    private String referenceNumber;
+
     @Size(max = 2048)
     @Column(length = 2048)
     private String note;
@@ -97,6 +101,7 @@ public class RecurringExpense implements Creatable, Modifiable {
             BigDecimal amount,
             String currency,
             String creditorName,
+            String referenceNumber,
             String note) {
         this.description = description;
         this.label = label;
@@ -106,6 +111,7 @@ public class RecurringExpense implements Creatable, Modifiable {
         this.amount = amount;
         this.currency = currency;
         this.creditorName = creditorName;
+        this.referenceNumber = referenceNumber;
         this.note = note;
     }
 }

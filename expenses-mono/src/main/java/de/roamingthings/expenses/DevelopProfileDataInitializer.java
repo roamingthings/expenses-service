@@ -33,6 +33,7 @@ public class DevelopProfileDataInitializer {
                                 BigDecimal.valueOf(1.23),
                                 "EUR",
                                 "Creditor 1",
+                                "Ref123",
                                 "Note 1"
                         );
                 recurringExpenseRepository.save(expense1);
@@ -48,6 +49,7 @@ public class DevelopProfileDataInitializer {
                                 BigDecimal.valueOf(4.56),
                                 "EUR",
                                 "Creditor 2",
+                                "Ref345",
                                 "Note 2"
                         );
                 recurringExpenseRepository.save(expense2);
