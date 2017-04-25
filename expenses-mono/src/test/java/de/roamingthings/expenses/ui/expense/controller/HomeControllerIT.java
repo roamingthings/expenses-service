@@ -1,5 +1,6 @@
 package de.roamingthings.expenses.ui.expense.controller;
 
+import de.roamingthings.SystemPropertyActiveProfileResolver;
 import de.roamingthings.junit.category.IntegrationTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -7,6 +8,7 @@ import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
@@ -27,6 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @WebAppConfiguration
 @Category(IntegrationTest.class)
+@ActiveProfiles(resolver = SystemPropertyActiveProfileResolver.class)
 public class HomeControllerIT {
     @Autowired
     private WebApplicationContext wac;
