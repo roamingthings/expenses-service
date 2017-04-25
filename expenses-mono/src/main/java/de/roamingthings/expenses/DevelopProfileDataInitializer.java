@@ -55,10 +55,5 @@ public class DevelopProfileDataInitializer {
                 recurringExpenseRepository.save(expense2);
             }
         };
-/*
-                Stream.of("jlong,spring", "dsyder,cloud", "webb,boot", "rwinch,security")
-                        .map(tpl -> tpl.split(","))
-                        .forEach(tpl -> accountRepository.save(new Account(tpl[0], tpl[1], true)));
-*/
     }
 }
