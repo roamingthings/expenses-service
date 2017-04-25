@@ -91,6 +91,10 @@
             <span layout:fragment="label-content">Creditor name</span>
         </div>
 
+        <div layout:insert="~{fragments/inputfield :: formControl(fieldId='referenceNumber', fieldRef=*{referenceNumber}, placeholder='Reference number', required=false)}" th:remove="tag">
+            <span layout:fragment="label-content">Reference number</span>
+        </div>
+
         <div layout:insert="~{fragments/inputfield :: formControl(fieldId='note', fieldRef=*{note}, placeholder='Note', required=false)}" th:remove="tag">
             <span layout:fragment="label-content">Note</span>
             <span layout:fragment="input-content">

@@ -49,6 +49,7 @@ public class RecurringExpenseController {
             currentRecurringExpense.setAmount(formExpenseModel.getAmount());
             currentRecurringExpense.setCurrency(formExpenseModel.getCurrency());
             currentRecurringExpense.setCreditorName(formExpenseModel.getCreditorName());
+            currentRecurringExpense.setReferenceNumber(formExpenseModel.getReferenceNumber());
             currentRecurringExpense.setNote(formExpenseModel.getNote());
 
             recurringExpenseService.save(currentRecurringExpense);
