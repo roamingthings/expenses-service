@@ -73,3 +73,5 @@ To undeploy issue the `undeploy.sh` command.
 ## Useful links
 
 http://www.baeldung.com/database-auditing-jpa[Baeldung: Auditing with JPA, Hibernate, and Spring Data JPA]
+
+https://www.petrikainulainen.net/programming/spring-framework/integration-testing-of-spring-mvc-applications-forms/[Integration Testing of Spring MVC Applications: Forms]
