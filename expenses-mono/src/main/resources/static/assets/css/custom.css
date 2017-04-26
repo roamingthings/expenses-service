@@ -116,4 +116,9 @@ body {
  */
 td.actions {
     text-align: right;
+    cursor: hand;
+}
+
+.selectable {
+    cursor: pointer;
 }

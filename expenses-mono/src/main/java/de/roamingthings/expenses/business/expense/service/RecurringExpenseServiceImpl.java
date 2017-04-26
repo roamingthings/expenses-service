@@ -32,4 +32,9 @@ public class RecurringExpenseServiceImpl implements RecurringExpenseService {
     public void save(RecurringExpense expense) {
         recurringExpenseRepository.save(expense);
     }
+
+    @Override
+    public void delete(Long id) {
+        recurringExpenseRepository.delete(id);
+    }
 }

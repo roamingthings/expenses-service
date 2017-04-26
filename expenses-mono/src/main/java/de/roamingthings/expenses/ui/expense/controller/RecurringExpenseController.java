@@ -57,7 +57,7 @@ public class RecurringExpenseController {
             recurringExpenseService.save(formExpenseModel);
         }
 
-        return "redirect:recurring_expenses";
+        return "redirect:/recurring_expenses";
     }
 
     @RequestMapping(path = "/details/{id}", method = RequestMethod.GET)
@@ -66,6 +66,13 @@ public class RecurringExpenseController {
         model.addAttribute("recurringExpense", recurringExpense);
 
         return "recurring_expenses/recurring_expenses_form";
+    }
+
+    @RequestMapping(path = "/delete/{id}", method = RequestMethod.GET)
+    public String deleteRecurringExpense(@PathVariable Long id) {
+        recurringExpenseService.delete(id);
+
+        return "redirect:/recurring_expenses";
     }
 
     @RequestMapping(path = "/new", method = RequestMethod.GET)
