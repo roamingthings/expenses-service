@@ -77,3 +77,15 @@ task buildDocker(type: Docker, dependsOn: build) {
         }
     }
 }
+
+test {
+    useJUnit {
+        excludeCategories 'de.roamingthings.junit.category.IntegrationTest'
+    }
+}
+
+task integrationTest(type: Test) {
+    useJUnit {
+        includeCategories 'de.roamingthings.junit.category.IntegrationTest'
+    }
+}
