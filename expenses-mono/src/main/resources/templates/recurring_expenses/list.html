@@ -30,59 +30,35 @@
         <div class="pull-right">
             <a href="recurring_expenses_form.html.html" th:href="@{/recurring_expenses/new}" class="btn btn-primary btn-xs"><i class="fa fa-plus" ></i> Add</a>
         </div>
-        <table id="expenses-table" class="table table-striped">
-            <thead>
-            <tr>
-                <th>Due Date</th>
-                <th>Description</th>
-                <th>Amount</th>
-                <th>Period</th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="expense : ${recurringExpenseList}" >
-                <td th:href="@{/recurring_expenses/details/} + ${expense.id}" th:text="${#temporals.format(expense.nextDueDate,'dd.MM.yyyy')}">01.05.2017</td>
-                <td th:text="${expense.description}">Electricity</td>
-                <td th:text="${expense.amount} + ' ' + ${expense.currency}">49.99 EUR</td>
-                <td th:text="${expense.recurrencePeriod}">Yearly</td>
-                <td class="actions" ><a href="recurring_expense_form.html" th:href="@{/recurring_expenses/delete/} + ${expense.id}"
-                                        class="btn btn-danger btn-xs"><i class="fa fa-times"></i> Delete</a>
-                <a href="recurring_expense_form.html" th:href="@{/recurring_expenses/details/} + ${expense.id}"
-                       class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Edit</a></td>
-            </tr>
-            </tbody>
-        </table>
 
 
+        <div id="summary-table"><table id="expenses-table" class="table table-striped" th:replace="~{/recurring_expenses/summary_table}"></table></div>
 
     </div>
 </div>
 <script layout:fragment="page-script">
-    $("#expenses-table tr").click(function() {
-        window.location = $(this).find('td:eq(0)').attr("href");
+    $("#expenses-table tr .selectable").click(function() {
+        window.location = $(this).parent().find('td:eq(0)').attr("href");
     });
-    $("#expenses-table tr").addClass("selectable")
+//    $("#expenses-table tr .selectable").addClass("selectable")
 
     jQuery(document).ready(function($) {
-        $("#search-form").submit(function(event) {
+        $(".btn-delete").click(function(event) {
 
             // Prevent the form from submitting via the browser.
             event.preventDefault();
-            searchViaAjax();
-
+            var serviceUri = event.target.href;
+            performDelete(serviceUri);
         });
     });
 
-    function searchAjax() {
+    function performDelete(serviceUri) {
         var data = {}
-        data["query"] = $("#query").val();
-
         $.ajax({
-            type : "POST",
+            type : "DELETE",
             contentType : "application/json",
-            url : "${home}search/api/getSearchResult",
-            data : JSON.stringify(data),
+            url : serviceUri,
+            data : '',
             dataType : 'json',
             timeout : 100000,
             success : function(data) {
@@ -97,6 +73,10 @@
                 console.log("DONE");
             }
         });
+    }
+
+    function display(data) {
+        $('#summary-table').html(data.responseText);
     }
 
 </script>
