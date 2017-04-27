@@ -35,7 +35,7 @@ public class RecurringExpenseController {
     @RequestMapping(method = RequestMethod.POST)
     public String updateRecurringExpenses(@Valid @ModelAttribute RecurringExpense formExpenseModel, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "recurring_expenses/recurring_expenses_form";
+            return "recurring_expenses/form";
         }
 
         if (formExpenseModel.getId() != null) {
@@ -65,7 +65,7 @@ public class RecurringExpenseController {
         final RecurringExpense recurringExpense = recurringExpenseService.findRecurringExpense(id);
         model.addAttribute("recurringExpense", recurringExpense);
 
-        return "recurring_expenses/recurring_expenses_form";
+        return "recurring_expenses/form";
     }
 
     @RequestMapping(path = "/delete/{id}", method = RequestMethod.GET)
@@ -81,6 +81,6 @@ public class RecurringExpenseController {
         recurringExpense.setNextDueDate(LocalDate.now());
         model.addAttribute("recurringExpense", recurringExpense);
 
-        return "recurring_expenses/recurring_expenses_form";
+        return "recurring_expenses/form";
     }
 }
