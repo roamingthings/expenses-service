@@ -34,6 +34,19 @@ public class RecurringExpenseServiceImpl implements RecurringExpenseService {
     }
 
     @Override
+    public RecurringExpense update(Long id, RecurringExpense expense) {
+        final RecurringExpense currentRecurringExpense = recurringExpenseRepository.findOne(id);
+
+        RecurringExpense updatedRecurringExpense = null;
+        if (currentRecurringExpense != null) {
+            currentRecurringExpense.updateMutableFieldsFrom(expense);
+            updatedRecurringExpense = recurringExpenseRepository.save(currentRecurringExpense);
+        }
+
+        return updatedRecurringExpense;
+    }
+
+    @Override
     public void delete(Long id) {
         recurringExpenseRepository.delete(id);
     }

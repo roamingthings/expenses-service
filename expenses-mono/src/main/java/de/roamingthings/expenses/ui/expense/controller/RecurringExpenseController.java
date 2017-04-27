@@ -39,20 +39,7 @@ public class RecurringExpenseController {
         }
 
         if (formExpenseModel.getId() != null) {
-
-            final RecurringExpense currentRecurringExpense = recurringExpenseService.findRecurringExpense(formExpenseModel.getId());
-            currentRecurringExpense.setDescription(formExpenseModel.getDescription());
-            currentRecurringExpense.setLabel(formExpenseModel.getLabel());
-            currentRecurringExpense.setNextDueDate(formExpenseModel.getNextDueDate());
-            currentRecurringExpense.setRecurrencePeriod(formExpenseModel.getRecurrencePeriod());
-            currentRecurringExpense.setExpenseType(formExpenseModel.getExpenseType());
-            currentRecurringExpense.setAmount(formExpenseModel.getAmount());
-            currentRecurringExpense.setCurrency(formExpenseModel.getCurrency());
-            currentRecurringExpense.setCreditorName(formExpenseModel.getCreditorName());
-            currentRecurringExpense.setReferenceNumber(formExpenseModel.getReferenceNumber());
-            currentRecurringExpense.setNote(formExpenseModel.getNote());
-
-            recurringExpenseService.save(currentRecurringExpense);
+            recurringExpenseService.update(formExpenseModel.getId(), formExpenseModel);
         } else {
             recurringExpenseService.save(formExpenseModel);
         }

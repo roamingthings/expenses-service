@@ -114,4 +114,17 @@ public class RecurringExpense implements Creatable, Modifiable {
         this.referenceNumber = referenceNumber;
         this.note = note;
     }
+
+    public void updateMutableFieldsFrom(RecurringExpense source) {
+        this.description = source.getDescription();
+        this.label = source.getLabel();
+        this.nextDueDate = source.getNextDueDate();
+        this.recurrencePeriod = source.getRecurrencePeriod();
+        this.expenseType = source.getExpenseType();
+        this.amount = source.getAmount();
+        this.currency = source.getCurrency();
+        this.creditorName = source.getCreditorName();
+        this.referenceNumber = source.getReferenceNumber();
+        this.note = source.getNote();
+    }
 }
