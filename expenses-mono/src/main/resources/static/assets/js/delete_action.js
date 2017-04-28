@@ -9,7 +9,6 @@ jQuery(document).ready(function($) {
 });
 
 function performDelete(serviceUri) {
-    var data = {}
     $.ajax({
         type : "DELETE",
         contentType : "application/json",
