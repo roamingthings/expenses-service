@@ -1,7 +1,12 @@
 package de.roamingthings.expenses.ui.expense.controller;
 
+import de.roamingthings.expenses.business.expense.domain.RecurringExpense;
+import de.roamingthings.expenses.business.expense.service.RecurringExpenseService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.inject.Inject;
 
 /**
  * @author Alexander Sparkowsky [info@roamingthings.de]
@@ -9,8 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class HomeController {
+
+    @Inject
+    private RecurringExpenseService recurringExpenseService;
+
     @RequestMapping("/")
-    public String index() {
+    public String index(Model model) {
+        final Iterable<RecurringExpense> recurringExpenseList = recurringExpenseService.findAllRecurringExpenseSummaries();
+        model.addAttribute("recurringExpenseList", recurringExpenseList);
+
         return "index";
     }
 }

@@ -17,12 +17,11 @@
     <tbody>
     <tr th:each="expense : ${recurringExpenseList}">
         <td th:href="@{/recurring_expenses/details/} + ${expense.id}"
-            th:text="${#temporals.format(expense.nextDueDate,'dd.MM.yyyy')}"
-            class="selectable">01.05.2017
+            th:text="${#temporals.format(expense.nextDueDate,'dd.MM.yyyy')}" class="attach-click">01.05.2017
         </td>
-        <td th:text="${expense.description}" class="selectable">Electricity</td>
-        <td th:text="${expense.amount} + ' ' + ${expense.currency}" class="selectable">49.99 EUR</td>
-        <td th:text="${expense.recurrencePeriod}" class="selectable">Yearly</td>
+        <td th:text="${expense.description}" class="attach-click">Electricity</td>
+        <td th:text="${expense.amount} + ' ' + ${expense.currency}" class="attach-click">49.99 EUR</td>
+        <td th:text="${expense.recurrencePeriod}" class="attach-click">Yearly</td>
         <td class="actions"><a href="form.html" th:href="@{/recurring_expenses/delete/} + ${expense.id}"
                                class="btn btn-danger btn-xs btn-delete"><i class="fa fa-times"></i> Delete</a>
             <a href="form.html" th:href="@{/recurring_expenses/details/} + ${expense.id}"

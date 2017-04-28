@@ -27,6 +27,8 @@
 
     <h2 class="sub-header">Next Recurring Expenses</h2>
     <div class="table-responsive">
+        <div id="summary-table"><table id="expenses-table" class="table table-striped" th:replace="~{/recurring_expenses/summary_table}"></table></div>
+
         <table th:remove="all" class="table table-striped">
             <thead>
             <tr>
