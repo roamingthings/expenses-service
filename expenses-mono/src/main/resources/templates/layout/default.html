@@ -74,6 +74,7 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
+                [[${#httpServletRequest.remoteUser}]]
                 <li th:fragment="menuItem (path, active, title, glyph, text)" class="active" th:class="${active==menu ? 'active' : ''}">
                     <a th:href="@{__${path}__}" th:title="${title}">
                         <i th:class="'fa fa-'+${glyph}" class="fa fa-home" aria-hidden="true"></i>

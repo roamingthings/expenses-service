@@ -18,7 +18,7 @@ public class HomeController {
     @Inject
     private RecurringExpenseService recurringExpenseService;
 
-    @RequestMapping("/")
+    @RequestMapping({"/", "/home"})
     public String index(Model model) {
         final Iterable<RecurringExpense> recurringExpenseList = recurringExpenseService.findAllRecurringExpenseSummaries();
         model.addAttribute("recurringExpenseList", recurringExpenseList);
