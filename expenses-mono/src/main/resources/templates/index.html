@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       layout:decorate="~{layout/default}"
       th:with="menu='overview'">
 <head>
@@ -22,7 +23,7 @@
 </head>
 
 <body>
-<div layout:fragment="content">
+<div layout:fragment="content" sec:authorize="isAuthenticated()">
     <h1 class="page-header">Overview</h1>
 
     <h2 class="sub-header">Next Recurring Expenses</h2>
