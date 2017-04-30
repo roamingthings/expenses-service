@@ -3,6 +3,7 @@ package de.roamingthings.expenses.ui.expense.controller;
 import de.roamingthings.expenses.business.expense.domain.RecurringExpense;
 import de.roamingthings.expenses.business.expense.service.RecurringExpenseService;
 import lombok.extern.java.Log;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,6 +32,7 @@ public class RecurringExpenseController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
+    @PreAuthorize("isAuthenticated()")
     public String listRecurringExpenses(Model model) {
         final Iterable<RecurringExpense> recurringExpenseList = recurringExpenseService.findAllRecurringExpenseSummaries();
         model.addAttribute("recurringExpenseList", recurringExpenseList);
@@ -39,6 +41,7 @@ public class RecurringExpenseController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
+    @PreAuthorize("isAuthenticated()")
     public String updateRecurringExpenses(@Valid @ModelAttribute RecurringExpense formExpenseModel, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "recurring_expenses/form";
@@ -54,6 +57,7 @@ public class RecurringExpenseController {
     }
 
     @RequestMapping(path = "/details/{id}", method = RequestMethod.GET)
+    @PreAuthorize("isAuthenticated()")
     public String editRecurringExpenses(@PathVariable Long id, Model model) {
         final RecurringExpense recurringExpense = recurringExpenseService.findRecurringExpense(id);
         model.addAttribute("recurringExpense", recurringExpense);
@@ -62,6 +66,7 @@ public class RecurringExpenseController {
     }
 
     @RequestMapping(path = "/delete/{id}", method = RequestMethod.DELETE)
+    @PreAuthorize("isAuthenticated()")
     public String deleteRecurringExpenseAjax(@PathVariable Long id, Model model, HttpServletRequest request) {
         recurringExpenseService.delete(id);
 
@@ -76,6 +81,7 @@ public class RecurringExpenseController {
     }
 
     @RequestMapping(path = "/new", method = RequestMethod.GET)
+    @PreAuthorize("isAuthenticated()")
     public String newRecurringExpenses(Model model) {
         final RecurringExpense recurringExpense = new RecurringExpense();
         recurringExpense.setNextDueDate(LocalDate.now());
