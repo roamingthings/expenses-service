@@ -27,6 +27,7 @@ import static org.hamcrest.CoreMatchers.containsString;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -81,9 +82,9 @@ public class RecurringExpenseControllerIT {
 
     @Test
     public void should_delete_recurring_expense() throws Exception {
-        this.mockMvc.perform(get("/recurring_expenses/delete/1"))
+        this.mockMvc.perform(delete("/recurring_expenses/delete/1"))
                 .andDo(print())
-                .andExpect(status().isFound());
+                .andExpect(status().isOk());
 //                .andExpect(forwardedUrl("redirect:recurring_expenses"));
 
         verify(recurringExpenseRepository, times(1)).delete(1L);
