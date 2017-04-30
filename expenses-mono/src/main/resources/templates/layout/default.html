@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" >
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -57,13 +57,11 @@
             <a class="navbar-brand" href="#">Expense Tracker</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Dashboard</a></li>
-                <li><a href="#">Settings</a></li>
-                <li><a href="#">Profile</a></li>
-                <li><a href="#">Help</a></li>
+            <ul class="nav navbar-nav navbar-right" sec:authorize="isAuthenticated()">
+                <li><a href="#" th:href="@{/}">Dashboard</a></li>
+                <li><a href="#" th:text="${#authentication.name}">User</a></li>
             </ul>
-            <form class="navbar-form navbar-right">
+            <form class="navbar-form navbar-right" th:remove="all">
                 <input type="text" class="form-control" placeholder="Search..."/>
             </form>
         </div>
@@ -72,9 +70,8 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
+        <div class="col-sm-3 col-md-2 sidebar" sec:authorize="isAuthenticated()">
             <ul class="nav nav-sidebar">
-                [[${#httpServletRequest.remoteUser}]]
                 <li th:fragment="menuItem (path, active, title, glyph, text)" class="active" th:class="${active==menu ? 'active' : ''}">
                     <a th:href="@{__${path}__}" th:title="${title}">
                         <i th:class="'fa fa-'+${glyph}" class="fa fa-home" aria-hidden="true"></i>
