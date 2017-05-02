@@ -29,7 +29,10 @@
     <div th:if="${param.logout}">
         You have been logged out.
     </div>
-    <form th:action="@{/login}" method="post">
+    <div><a href="/login/github">Login using GitHub</a></div>
+    <div><a href="/login/facebook">Login using Facebook</a></div>
+
+    <form th:remove="all" th:action="@{/login}" method="post">
         <div class="form-group">
             <label th:for="username">User Name</label>
             <input th:id="username" type="text" name="username" class="form-control"/>
