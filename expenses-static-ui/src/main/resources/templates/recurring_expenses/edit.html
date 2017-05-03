@@ -41,7 +41,7 @@
             <span layout:fragment="label-content">Next due date</span>
             <span layout:fragment="input-content">
                 <input type="text" class="form-control" id="nextDueDate" placeholder="dd.mm.yyyy" th:name="nextDueDate"
-                       th:value="*{#temporals.format(nextDueDate, 'dd.MM.yyyy')}"/>
+                       th:loginUri="*{#temporals.format(nextDueDate, 'dd.MM.yyyy')}"/>
             </span>
         </div>
 
@@ -52,7 +52,7 @@
                 <select id="recurrencePeriod" class="form-control" th:field="*{{recurrencePeriod}}">
                     <option th:each="period : ${T(de.roamingthings.expenses.ui.expense.RecurrencePeriod).values()}"
                             th:selected="${period == T(de.roamingthings.expenses.ui.expense.RecurrencePeriod)}"
-                            th:value="${{period}}"
+                            th:loginUri="${{period}}"
                             th:text="#{${'recurrencePeriod.' + period}}">Wireframe
                     </option>
                 </select>
@@ -65,7 +65,7 @@
                 <select id="expenseType" class="form-control" th:field="*{{expenseType}}">
                     <option th:each="expenseType : ${T(de.roamingthings.expenses.ui.expense.ExpenseType).values()}"
                             th:selected="${expenseType == T(de.roamingthings.expenses.ui.expense.ExpenseType)}"
-                            th:value="${{expenseType}}"
+                            th:loginUri="${{expenseType}}"
                             th:text="#{${'expenseType.' + expenseType}}">Wireframe
                     </option>
                 </select>

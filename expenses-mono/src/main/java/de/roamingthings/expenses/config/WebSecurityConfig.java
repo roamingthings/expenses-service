@@ -19,6 +19,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
@@ -38,6 +39,13 @@ import java.util.List;
 @EnableAuthorizationServer
 @Order(6)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    private AuthenticationSuccessHandler userProfileUrlAuthenticationSuccessHandler;
+
+    public WebSecurityConfig(AuthenticationSuccessHandler userProfileUrlAuthenticationSuccessHandler) {
+        this.userProfileUrlAuthenticationSuccessHandler = userProfileUrlAuthenticationSuccessHandler;
+    }
+
     @Configuration
     @EnableResourceServer
     protected static class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
@@ -52,11 +60,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.antMatcher("/**").authorizeRequests().antMatchers("/login", "/webjars/**", "/assets/**", "/vendor/**").permitAll().anyRequest()
-                .authenticated().and().exceptionHandling()
-                .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login")).and().logout()
-                .logoutSuccessUrl("/login").permitAll().and().csrf()
-                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and()
+        http
+                .antMatcher("/**").authorizeRequests()
+                .antMatchers(OAuth2AuthenticationProvider.LOCAL.loginUri, "/webjars/**", "/assets/**", "/vendor/**", "/console/**").permitAll()
+                .anyRequest().authenticated()
+            .and()
+                .antMatcher("/console/**").antMatcher("/console/**").csrf().disable()
+            .exceptionHandling()
+                .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint(OAuth2AuthenticationProvider.LOCAL.loginUri))
+                .and().logout()
+                    .logoutSuccessUrl(OAuth2AuthenticationProvider.LOCAL.loginUri).permitAll().and().csrf()
+                    .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+            .and()
                 .addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class);
     }
 
@@ -90,8 +105,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private Filter ssoFilter() {
         CompositeFilter filter = new CompositeFilter();
         List<Filter> filters = new ArrayList<>();
-        filters.add(ssoFilter(facebook(), "/login/facebook"));
-        filters.add(ssoFilter(github(), "/login/github"));
+        filters.add(ssoFilter(facebook(), OAuth2AuthenticationProvider.FACEBOOK.loginUri));
+        filters.add(ssoFilter(github(), OAuth2AuthenticationProvider.GITHUB.loginUri));
         filter.setFilters(filters);
         return filter;
     }
@@ -107,6 +122,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 client.getResource().getUserInfoUri(), client.getClient().getClientId());
         tokenServices.setRestTemplate(template);
         filter.setTokenServices(tokenServices);
+
+        filter.setAuthenticationSuccessHandler(userProfileUrlAuthenticationSuccessHandler);
 
         return filter;
     }

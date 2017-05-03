@@ -11,7 +11,7 @@
     <span layout:fragment="input-content"
           th:remove="tag">
         <input type="text" class="form-control" th:id="${fieldId}" th:placeholder="${placeholder}"
-               th:name="${fieldId}" th:value="${fieldRef}" th:required="${required}"/>
+               th:name="${fieldId}" th:loginUri="${fieldRef}" th:required="${required}"/>
     </span>
     <span class="help-block" th:if="${#fields.hasErrors(fieldId)}">fehler:
         <div th:each="err : ${#fields.errors(fieldId)}" th:text="${err}"/>
