@@ -1,4 +1,4 @@
-package de.roamingthings.expenses;
+package de.roamingthings.expenses.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories
+@EnableJpaRepositories("de.roamingthings.expenses")
 @EnableJpaAuditing
 public class PersistenceConfig {
 }

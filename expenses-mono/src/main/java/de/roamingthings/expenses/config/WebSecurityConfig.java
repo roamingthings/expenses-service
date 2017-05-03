@@ -1,4 +1,4 @@
-package de.roamingthings.expenses;
+package de.roamingthings.expenses.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoTokenServices;
