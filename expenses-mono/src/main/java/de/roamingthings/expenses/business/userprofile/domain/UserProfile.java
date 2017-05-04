@@ -31,7 +31,7 @@ public class UserProfile implements Creatable, Modifiable {
     private Date modifiedAt;
 
     @Column(name = "github_id")
-    private Integer githubId;
+    private String githubId;
 
     @Column(name = "facebook_id")
     private String facebookId;

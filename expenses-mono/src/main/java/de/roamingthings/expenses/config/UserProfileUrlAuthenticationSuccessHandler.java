@@ -68,7 +68,7 @@ public class UserProfileUrlAuthenticationSuccessHandler implements Authenticatio
             case GITHUB:
                 Map<String, Object> details = (Map<String, Object>) ((OAuth2Authentication) authentication).getUserAuthentication().getDetails();
                 final Integer githubId = (Integer) details.get("id");
-                 userProfile = userProfileRepository.findByGithubId(githubId);
+                 userProfile = userProfileRepository.findByGithubId(String.valueOf(githubId));
                 break;
             case FACEBOOK:
                 Map<String, String> facebookDetails = (Map<String, String>) ((OAuth2Authentication) authentication).getUserAuthentication().getDetails();
@@ -80,7 +80,7 @@ public class UserProfileUrlAuthenticationSuccessHandler implements Authenticatio
         }
 
         if (userProfile == null) {
-            return "/profile";
+            return "/userprofile";
         } else {
             return "/";
         }

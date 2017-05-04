@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.client.OAuth2ClientContext;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.filter.OAuth2ClientAuthenticationProcessingFilter;
@@ -41,9 +42,11 @@ import java.util.List;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private AuthenticationSuccessHandler userProfileUrlAuthenticationSuccessHandler;
+    private UserDetailsService userDetailsService;
 
-    public WebSecurityConfig(AuthenticationSuccessHandler userProfileUrlAuthenticationSuccessHandler) {
+    public WebSecurityConfig(AuthenticationSuccessHandler userProfileUrlAuthenticationSuccessHandler, UserDetailsService userDetailsService) {
         this.userProfileUrlAuthenticationSuccessHandler = userProfileUrlAuthenticationSuccessHandler;
+        this.userDetailsService = userDetailsService;
     }
 
     @Configuration
@@ -65,7 +68,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(OAuth2AuthenticationProvider.LOCAL.loginUri, "/webjars/**", "/assets/**", "/vendor/**", "/console/**").permitAll()
                 .anyRequest().authenticated()
             .and()
-                .antMatcher("/console/**").antMatcher("/console/**").csrf().disable()
+//                .antMatcher("/console/**").antMatcher("/console/**").csrf().disable()
             .exceptionHandling()
                 .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint(OAuth2AuthenticationProvider.LOCAL.loginUri))
                 .and().logout()
@@ -78,8 +81,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
-                .inMemoryAuthentication()
-                .withUser("user").password("password").roles("USER");
+                .userDetailsService(userDetailsService);
+//                .inMemoryAuthentication()
+//                .withUser("user").password("password").roles("USER");
     }
 
     @Bean
@@ -123,7 +127,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         tokenServices.setRestTemplate(template);
         filter.setTokenServices(tokenServices);
 
-        filter.setAuthenticationSuccessHandler(userProfileUrlAuthenticationSuccessHandler);
+//        filter.setAuthenticationSuccessHandler(userProfileUrlAuthenticationSuccessHandler);
 
         return filter;
     }
