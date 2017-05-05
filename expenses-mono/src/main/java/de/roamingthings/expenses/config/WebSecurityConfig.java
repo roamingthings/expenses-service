@@ -81,9 +81,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
-                .userDetailsService(userDetailsService);
-//                .inMemoryAuthentication()
-//                .withUser("user").password("password").roles("USER");
+//                .userDetailsService(userDetailsService);
+                .inMemoryAuthentication()
+                .withUser("user").password("password").roles("USER");
     }
 
     @Bean
@@ -127,7 +127,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         tokenServices.setRestTemplate(template);
         filter.setTokenServices(tokenServices);
 
-//        filter.setAuthenticationSuccessHandler(userProfileUrlAuthenticationSuccessHandler);
+        filter.setAuthenticationSuccessHandler(userProfileUrlAuthenticationSuccessHandler);
 
         return filter;
     }

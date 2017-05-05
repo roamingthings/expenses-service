@@ -49,6 +49,9 @@ public class UserProfileUrlAuthenticationSuccessHandler implements Authenticatio
 
         final String requestURI = request.getRequestURI();
         OAuth2AuthenticationProvider authenticationProvider = OAuth2AuthenticationProvider.withLoginUri(requestURI);
+
+        // TODO store authenticationProvider in authentication
+
         String targetUrl = determineTargetUrl(authentication, authenticationProvider);
 
         if (response.isCommitted()) {
@@ -67,11 +70,12 @@ public class UserProfileUrlAuthenticationSuccessHandler implements Authenticatio
         switch (authenticationProvider) {
             case GITHUB:
                 Map<String, Object> details = (Map<String, Object>) ((OAuth2Authentication) authentication).getUserAuthentication().getDetails();
-                final Integer githubId = (Integer) details.get("id");
-                 userProfile = userProfileRepository.findByGithubId(String.valueOf(githubId));
+                String principal = (String) authentication.getPrincipal();
+                userProfile = userProfileRepository.findByGithubId(String.valueOf(principal));
                 break;
             case FACEBOOK:
                 Map<String, String> facebookDetails = (Map<String, String>) ((OAuth2Authentication) authentication).getUserAuthentication().getDetails();
+                String facebookPrincipal = (String) authentication.getPrincipal();
                 final String facebookId = facebookDetails.get("id");
                 userProfile = userProfileRepository.findByFacebookId(facebookId);
                 break;
@@ -80,7 +84,7 @@ public class UserProfileUrlAuthenticationSuccessHandler implements Authenticatio
         }
 
         if (userProfile == null) {
-            return "/userprofile";
+            return "/userprofile?provider=" + authenticationProvider;
         } else {
             return "/";
         }
@@ -97,6 +101,7 @@ public class UserProfileUrlAuthenticationSuccessHandler implements Authenticatio
     public void setRedirectStrategy(RedirectStrategy redirectStrategy) {
         this.redirectStrategy = redirectStrategy;
     }
+
     protected RedirectStrategy getRedirectStrategy() {
         return redirectStrategy;
     }

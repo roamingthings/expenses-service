@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}"
+      th:with="menu='user_profile'">
+<head>
+
+    <title>Expense Tracker :: Edit Recurring Expense</title>
+
+    <th:block th:remove="all">
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+              crossorigin="anonymous"/>
+        <script src="https://use.fontawesome.com/c2480015ef.js"></script>
+
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <link href="../../static/vendor/css/ie10-viewport-bug-workaround.css" rel="stylesheet"/>
+
+        <!-- Custom styles for this template -->
+        <link href="../../static/assets/css/custom.css" rel="stylesheet"/>
+    </th:block>
+</head>
+
+<body>
+<div layout:fragment="content">
+    <h1 class="page-header">User Profile</h1>
+    <form th:id="expense" action="#" th:action="@{/userprofile}" th:object="${userProfile}" method="post">
+        <input type="hidden" id="id" th:name="id" th:field="*{id}"/>
+
+        <div th:text="*{githubId}"></div>
+        <div th:text="*{facebookId}"></div>
+        <div layout:insert="~{fragments/inputfield :: formControl(fieldId='email', fieldRef=*{email}, placeholder='Email', required=true)}" th:remove="tag">
+            <span layout:fragment="label-content">Email</span>
+        </div>
+
+
+        <div class="pull-right">
+            <a th:href="@{/}" class="btn btn-default">Cancel</a>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
