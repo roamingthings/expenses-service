@@ -50,9 +50,9 @@ dependencies {
 	compile('org.thymeleaf.extras:thymeleaf-extras-java8time:3.0.0.RELEASE')
 	compile('org.thymeleaf.extras:thymeleaf-extras-springsecurity4:3.0.0.RELEASE')
 
-    compile('org.webjars:bootstrap:3.3.7-1')
+    compile('org.webjars:bootstrap:3.3.7')
     compile('org.webjars:font-awesome:4.7.0')
-    compile 'org.webjars:webjars-locator'
+    compile('org.webjars:webjars-locator')
 
 	runtime('com.h2database:h2')
 	runtime('org.postgresql:postgresql')
