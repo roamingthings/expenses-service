@@ -2,10 +2,11 @@ package de.roamingthings.expenses.user.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.Size;
+import java.util.Set;
 
 /**
  * @author Alexander Sparkowsky [info@roamingthings.de]
@@ -19,4 +20,24 @@ public class User {
     @GeneratedValue
     private Long id;
 
+    @NotEmpty
+    @Size(max = 50)
+    @Column(length = 50, nullable = false)
+    private String username;
+
+    @NotEmpty
+    @Column(name = "password_hash", length = 64, nullable = false)
+    private String passwordHash;
+
+    private boolean enabled;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable
+    // ~ defaults to @JoinTable(name = "USER_ROLE", joinColumns = @JoinColumn(name = "user_id"),
+    //     inverseJoinColumns = @joinColumn(name = "role_id"))
+    private Set<Role> roles;
+
+    public User(String username) {
+        this.username = username;
+    }
 }
