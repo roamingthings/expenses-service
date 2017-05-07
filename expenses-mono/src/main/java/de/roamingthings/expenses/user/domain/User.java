@@ -37,7 +37,10 @@ public class User {
     //     inverseJoinColumns = @joinColumn(name = "role_id"))
     private Set<Role> roles;
 
-    public User(String username) {
+    public User(String username, String passwordHash, boolean enabled, Set<Role> roles) {
         this.username = username;
+        this.passwordHash = passwordHash;
+        this.enabled = enabled;
+        this.roles = roles;
     }
 }
