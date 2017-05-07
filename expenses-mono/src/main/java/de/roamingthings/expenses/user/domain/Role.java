@@ -26,7 +26,7 @@ public class Role {
     private Long id;
 
     @NotEmpty
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String role;
 
     public Role(String role) {
