@@ -1,5 +1,6 @@
 package de.roamingthings.expenses.user.service;
 
+import de.roamingthings.expenses.user.domain.User;
 import de.roamingthings.expenses.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -13,5 +14,10 @@ public class UserServiceImpl implements UserService {
 
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 }
