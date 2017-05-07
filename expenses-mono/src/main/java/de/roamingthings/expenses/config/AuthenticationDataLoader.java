@@ -1,12 +1,8 @@
 package de.roamingthings.expenses.config;
 
-import de.roamingthings.expenses.business.expense.repository.RecurringExpenseRepository;
 import de.roamingthings.expenses.user.service.RoleService;
 import de.roamingthings.expenses.user.service.UserService;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Ensure that the roles and an admin user are present in the database.
@@ -15,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @version 2017/05/07
  */
 @Configuration
-public class AuthenticationDataLoader {
+public class AuthenticationDataLoader implements DataInitializer {
 
     private final RoleService roleService;
     private final UserService userService;
@@ -25,14 +21,11 @@ public class AuthenticationDataLoader {
         this.userService = userService;
     }
 
-    @Bean
-    @Transactional
-    CommandLineRunner initData(RecurringExpenseRepository recurringExpenseRepository) {
-        return args -> {
-            roleService.addRoleIfNotExists("ADMIN");
-            roleService.addRoleIfNotExists("USER");
+    @Override
+    public void initializeData() {
+        roleService.addRoleIfNotExists("ADMIN");
+        roleService.addRoleIfNotExists("USER");
 
-            userService.addEnabledUserWithRolesIfNotExists("admin", "secret", roleService.findByRole("ADMIN"), roleService.findByRole("USER"));
-        };
+        userService.addEnabledUserWithRolesIfNotExists("admin", "secret", roleService.findByRole("ADMIN"), roleService.findByRole("USER"));
     }
 }
