@@ -17,7 +17,7 @@ public class OAuth2AuthenticationProviderTest {
 
     @Test
     public void should_return_facebook_uri() throws Exception {
-        assertThat(OAuth2AuthenticationProvider.withLoginUri(OAuth2AuthenticationProvider.FACEBOOK.loginUri), is(OAuth2AuthenticationProvider.GITHUB));
+        assertThat(OAuth2AuthenticationProvider.withLoginUri(OAuth2AuthenticationProvider.FACEBOOK.loginUri), is(OAuth2AuthenticationProvider.FACEBOOK));
     }
 
     @Test

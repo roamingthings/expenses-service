@@ -11,6 +11,13 @@ spring:
       write_dates_as_timestamps: false
 server:
   port: 8080
+security:
+  oauth2:
+    client:
+      client-id: acme
+      client-secret: acmesecret
+      scope: read,write
+      auto-approve-scopes: '.*'
 
 facebook:
   client:

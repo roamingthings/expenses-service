@@ -37,7 +37,7 @@ import java.util.List;
 @Configuration
 @EnableWebSecurity
 @EnableOAuth2Client
-@EnableAuthorizationServer
+//@EnableAuthorizationServer
 @Order(6)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
