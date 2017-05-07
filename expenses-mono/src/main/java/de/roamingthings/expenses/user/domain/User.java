@@ -19,9 +19,4 @@ public class User {
     @GeneratedValue
     private Long id;
 
-    private String authProviderId;
-
-    public User(String authProviderId) {
-        this.authProviderId = authProviderId;
-    }
 }

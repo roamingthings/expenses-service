@@ -10,6 +10,4 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface UserProfileRepository extends JpaRepository<UserProfile, Long> {
-    UserProfile findByGithubId(String githubId);
-    UserProfile findByFacebookId(String facebookId);
 }
