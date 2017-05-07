@@ -22,7 +22,7 @@ public class User {
 
     @NotEmpty
     @Size(max = 50)
-    @Column(length = 50, nullable = false)
+    @Column(length = 50, nullable = false, unique = true)
     private String username;
 
     @NotEmpty
@@ -43,4 +43,5 @@ public class User {
         this.enabled = enabled;
         this.roles = roles;
     }
+
 }
