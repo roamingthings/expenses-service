@@ -1,0 +1,4 @@
+allprojects {
+    group = 'de.roamingthings.expenses'
+    version = '0.0.1'
+}

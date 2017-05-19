@@ -1,0 +1,51 @@
+plugins {
+  id "com.moowork.node" version "1.1.1"
+  id "com.moowork.gulp" version "1.1.1"
+  id "java"
+}
+
+node {
+  version = '7.10.0'
+  npmVersion = '4.2.0'
+  download = true
+  workDir = file("${project.projectDir}/node")
+  nodeModulesDir = file("${project.projectDir}/")
+}
+
+gulp {
+  workDir = file("${project.projectDir}")
+  colors = true
+  bufferOutput = false
+}
+
+task npmClean(type: Delete) {
+  final def webDir = "${rootDir}/frontend"
+  delete "${webDir}/node"
+  delete "${webDir}/node_modules"
+  delete "${webDir}/dist"
+  delete "${webDir}/coverage"
+}
+task distClean(type: Delete) {
+
+  final def webDir = "${rootDir}/frontend"
+  delete "${webDir}/dist"
+  delete "${webDir}/coverage"
+  delete "${webDir}/build"
+}
+
+task jar(type: Jar, overwrite: true) {
+  from(fileTree("dist")) {
+    into "META-INF/resources/webjars/frontend/${project.version}"
+  }
+}
+jar.dependsOn(npm_install)
+jar.dependsOn(npm_run_build)
+
+// Don't clean npm within clean lifecycle; clean npm manually if needed
+clean.dependsOn(distClean)
+
+// check task for npm
+//check.dependsOn(npm_run_test) //TODO: reactivate testing again
+
+task runAll{}
+runAll.dependsOn(npm_run_start)
