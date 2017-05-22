@@ -49,3 +49,5 @@ clean.dependsOn(distClean)
 
 task runAll{}
 runAll.dependsOn(npm_run_start)
+
+defaultTasks 'jar'
