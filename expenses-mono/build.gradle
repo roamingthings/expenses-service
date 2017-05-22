@@ -42,7 +42,6 @@ sourceSets {
         }
         resources.srcDir file('src/integration-test/resources')
     }
-
 /*
     // This is just to trick IntelliJ IDEA to add integration test
     // resources to classpath when running integration tests from
@@ -60,8 +59,7 @@ configurations {
 }
 
 dependencies {
-    compile project(':expenses-frontend')
-
+    runtime project(':expenses-frontend')
     compile('org.springframework.boot:spring-boot-starter-web')
     compile("org.springframework.boot:spring-boot-starter-security")
     compile("org.springframework.security.oauth:spring-security-oauth2")
@@ -130,5 +128,6 @@ task integrationTest(type: Test) {
         events "passed", "skipped", "failed"
     }
 }
+
 
 defaultTasks 'build'
