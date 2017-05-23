@@ -21,6 +21,7 @@ spring:
         database: H2
         show-sql: true
         hibernate:
-            ddl-auto: create-drop
+            ddl-auto: none
     thymeleaf:
         cache: false
+logging.level.liquibase: DEBUG

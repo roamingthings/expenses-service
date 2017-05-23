@@ -19,6 +19,9 @@ security:
       scope: read,write
       auto-approve-scopes: '.*'
 
+liquibase:
+  change-log: classpath:/db/changelog/db.changelog-master.xml
+
 facebook:
   client:
     clientId: ${facebookClientId}
