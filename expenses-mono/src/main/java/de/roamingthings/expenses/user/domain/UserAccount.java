@@ -15,7 +15,8 @@ import java.util.Set;
 @Entity
 @Data
 @NoArgsConstructor
-public class User {
+@Table(name = "user_account")
+public class UserAccount {
     @Id
     @GeneratedValue
     private Long id;
@@ -26,8 +27,8 @@ public class User {
     private String username;
 
     @NotEmpty
-    @Column(name = "password_hash", length = 64, nullable = false)
-    private String passwordHash;
+    @Column(name = "password_digest", length = 64, nullable = false)
+    private String passwordDigest;
 
     private boolean enabled;
 
@@ -37,9 +38,9 @@ public class User {
     //     inverseJoinColumns = @joinColumn(name = "role_id"))
     private Set<Role> roles;
 
-    public User(String username, String passwordHash, boolean enabled, Set<Role> roles) {
+    public UserAccount(String username, String passwordDigest, boolean enabled, Set<Role> roles) {
         this.username = username;
-        this.passwordHash = passwordHash;
+        this.passwordDigest = passwordDigest;
         this.enabled = enabled;
         this.roles = roles;
     }

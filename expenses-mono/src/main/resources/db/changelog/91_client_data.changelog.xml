@@ -7,7 +7,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <changeSet id="03_01_insert_sample_clients" author="asparkowsky">
+    <changeSet id="91_01_insert_sample_clients" author="asparkowsky" context="development">
         <insert tableName="oauth_client_details">
             <column name="client_id" value="fooClientIdPassword" />
             <column name="client_secret" value="secret" />

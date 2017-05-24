@@ -24,4 +24,10 @@ spring:
             ddl-auto: none
     thymeleaf:
         cache: false
+
+liquibase:
+  contexts: development
+
 logging.level.liquibase: DEBUG
+logging.level.org.hibernate.SQL: debug
+logging.level.org.hibernate.type.descriptor.sql: trace

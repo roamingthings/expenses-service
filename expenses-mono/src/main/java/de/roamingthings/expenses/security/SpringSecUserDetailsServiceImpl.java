@@ -1,6 +1,6 @@
 package de.roamingthings.expenses.security;
 
-import de.roamingthings.expenses.user.domain.User;
+import de.roamingthings.expenses.user.domain.UserAccount;
 import de.roamingthings.expenses.user.service.UserService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.convert.converter.Converter;
@@ -16,9 +16,9 @@ import org.springframework.stereotype.Service;
 @Service("userDetailsService")
 public class SpringSecUserDetailsServiceImpl implements UserDetailsService {
     private final UserService userService;
-    private final Converter<User, UserDetails> userUserDetailsConverter;
+    private final Converter<UserAccount, UserDetails> userUserDetailsConverter;
 
-    public SpringSecUserDetailsServiceImpl(UserService userService, @Qualifier("userToUserDetails") Converter<User, UserDetails> userUserDetailsConverter) {
+    public SpringSecUserDetailsServiceImpl(UserService userService, @Qualifier("userToUserDetails") Converter<UserAccount, UserDetails> userUserDetailsConverter) {
         this.userService = userService;
         this.userUserDetailsConverter = userUserDetailsConverter;
     }

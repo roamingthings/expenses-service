@@ -84,6 +84,7 @@ dependencies {
 	runtime('com.h2database:h2')
 	runtime('org.postgresql:postgresql')
     compile('org.liquibase:liquibase-core:3.5.0')
+    compile('org.hibernate:hibernate-java8')
 
     compile group: 'org.hibernate', name: 'hibernate-envers', version: dependencyManagement.importedProperties['hibernate.version']
 

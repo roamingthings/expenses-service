@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="04_01_create_table_recurring_expense" author="asparkowsky">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="recurring_expense"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="recurring_expense">
+            <column name="id" type="long" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="pk_recurring_expense"/>
+            </column>
+            <column name="version" type="INTEGER"/>
+            <column name="created_at" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_at" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(160)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="label" type="VARCHAR(160)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="next_due_date" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="recurrence_period" type="VARCHAR(80)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="expense_type" type="VARCHAR(80)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="amount" type="DECIMAL">
+                <constraints nullable="false"/>
+            </column>
+            <column name="currency" type="VARCHAR(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creditor_name" type="VARCHAR(160)"/>
+            <column name="reference_number" type="VARCHAR(80)"/>
+            <column name="note" type="VARCHAR(2048)"/>
+        </createTable>
+
+        <rollback>
+            <dropTable tableName="recurring_expense"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="04_02_create_table_recurring_expense_aud" author="asparkowsky">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="recurring_expense_aud"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="recurring_expense_aud">
+            <column name="id" type="long" autoIncrement="true"/>
+            <column name="REV" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="REVTYPE" type="tinyint"/>
+            <column name="version" type="INTEGER"/>
+            <column name="created_at" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_at" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(160)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="label" type="VARCHAR(160)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="next_due_date" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="recurrence_period" type="VARCHAR(80)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="expense_type" type="VARCHAR(80)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="amount" type="DECIMAL">
+                <constraints nullable="false"/>
+            </column>
+            <column name="currency" type="VARCHAR(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creditor_name" type="VARCHAR(160)"/>
+            <column name="reference_number" type="VARCHAR(80)"/>
+            <column name="note" type="VARCHAR(2048)"/>
+        </createTable>
+
+        <addPrimaryKey tableName="recurring_expense_aud" columnNames="id, rev"/>
+
+        <rollback>
+            <dropTable tableName="recurring_expense"/>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>

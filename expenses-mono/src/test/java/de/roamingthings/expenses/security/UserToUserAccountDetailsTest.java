@@ -1,7 +1,7 @@
 package de.roamingthings.expenses.security;
 
 import de.roamingthings.expenses.user.domain.Role;
-import de.roamingthings.expenses.user.domain.User;
+import de.roamingthings.expenses.user.domain.UserAccount;
 import org.junit.Test;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,21 +22,21 @@ import static org.junit.Assert.assertThat;
  * @author Alexander Sparkowsky [info@roamingthings.de]
  * @version 2017/05/07
  */
-public class UserToUserDetailsTest {
+public class UserToUserAccountDetailsTest {
     @Test
     public void should_convert_User_to_UserDetails() throws Exception {
         final Set<Role> roles = Arrays.stream("ADMIN,USER".split(","))
                 .map(Role::new)
                 .collect(toSet());
-        final User user = new User("testuser", null, true, roles);
+        final UserAccount userAccount = new UserAccount("testuser", null, true, roles);
 
         UserToUserDetails converter = new UserToUserDetails();
-        final UserDetails convertedUserDetails = converter.convert(user);
+        final UserDetails convertedUserDetails = converter.convert(userAccount);
 
         assertNotNull(convertedUserDetails);
 
-        assertThat(convertedUserDetails.getUsername(), is(user.getUsername()));
-        assertThat(convertedUserDetails.getPassword(), is(user.getPasswordHash()));
+        assertThat(convertedUserDetails.getUsername(), is(userAccount.getUsername()));
+        assertThat(convertedUserDetails.getPassword(), is(userAccount.getPasswordDigest()));
         final Collection<? extends GrantedAuthority> authorities = convertedUserDetails.getAuthorities();
         assertNotNull(authorities);
 

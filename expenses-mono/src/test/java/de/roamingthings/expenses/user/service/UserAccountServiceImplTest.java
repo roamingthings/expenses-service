@@ -1,7 +1,7 @@
 package de.roamingthings.expenses.user.service;
 
 import de.roamingthings.expenses.user.domain.Role;
-import de.roamingthings.expenses.user.domain.User;
+import de.roamingthings.expenses.user.domain.UserAccount;
 import de.roamingthings.expenses.user.repository.UserRepository;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
@@ -18,7 +18,7 @@ import static org.mockito.Mockito.*;
  * @author Alexander Sparkowsky [info@roamingthings.de]
  * @version 2017/05/07
  */
-public class UserServiceImplTest {
+public class UserAccountServiceImplTest {
     @Test
     public void should_add_user_if_not_existing_in_repository() throws Exception {
         final UserRepository userRepositoryMock = mock(UserRepository.class);
@@ -38,13 +38,13 @@ public class UserServiceImplTest {
         verify(passwordEncoderMock).encode(passwordCaptor.capture());
         assertThat(passwordCaptor.getValue(), is("password"));
 
-        ArgumentCaptor<User> userEntityCaptor = ArgumentCaptor.forClass(User.class);
+        ArgumentCaptor<UserAccount> userEntityCaptor = ArgumentCaptor.forClass(UserAccount.class);
         verify(userRepositoryMock, times(1)).save(userEntityCaptor.capture());
-        final User createdUser = userEntityCaptor.getValue();
-        assertNotNull(createdUser);
-        assertThat(createdUser.getUsername(), is("test"));
-        assertThat(createdUser.getPasswordHash(), is("encoded"));
-        assertThat(createdUser.getRoles(), containsInAnyOrder(
+        final UserAccount createdUserAccount = userEntityCaptor.getValue();
+        assertNotNull(createdUserAccount);
+        assertThat(createdUserAccount.getUsername(), is("test"));
+        assertThat(createdUserAccount.getPasswordDigest(), is("encoded"));
+        assertThat(createdUserAccount.getRoles(), containsInAnyOrder(
                 hasProperty("role", is("ADMIN")),
                 hasProperty("role", is("USER"))
         ));
@@ -64,7 +64,7 @@ public class UserServiceImplTest {
         verify(userRepositoryMock).existsByUsername(usernameCaptor.capture());
         assertThat(usernameCaptor.getValue(), is("test"));
 
-        verify(userRepositoryMock, never()).save(any(User.class));
+        verify(userRepositoryMock, never()).save(any(UserAccount.class));
     }
 
 }

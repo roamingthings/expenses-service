@@ -1,6 +1,6 @@
 package de.roamingthings.expenses.user.repository;
 
-import de.roamingthings.expenses.user.domain.User;
+import de.roamingthings.expenses.user.domain.UserAccount;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -9,8 +9,8 @@ import org.springframework.stereotype.Repository;
  * @version 2017/05/03
  */
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
-    User findByUsername(String username);
+public interface UserRepository extends JpaRepository<UserAccount, Long> {
+    UserAccount findByUsername(String username);
 
     boolean existsByUsername(String username);
 }

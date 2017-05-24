@@ -1,7 +1,7 @@
 package de.roamingthings.expenses.user.service;
 
 import de.roamingthings.expenses.user.domain.Role;
-import de.roamingthings.expenses.user.domain.User;
+import de.roamingthings.expenses.user.domain.UserAccount;
 import de.roamingthings.expenses.user.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findByUsername(String username) {
+    public UserAccount findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 
@@ -36,8 +36,8 @@ public class UserServiceImpl implements UserService {
             final String passwordHash = passwordEncoder.encode(password);
 
             final Set<Role> roleSet = Stream.of(roles).collect(toSet());
-            User user = new User(username, passwordHash, true, roleSet);
-            userRepository.save(user);
+            UserAccount userAccount = new UserAccount(username, passwordHash, true, roleSet);
+            userRepository.save(userAccount);
         }
     }
 }
