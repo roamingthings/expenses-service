@@ -5,10 +5,8 @@ import de.roamingthings.expenses.business.expense.domain.ExpenseType;
 import de.roamingthings.expenses.business.expense.domain.RecurrencePeriod;
 import de.roamingthings.expenses.business.expense.domain.RecurringExpense;
 import de.roamingthings.expenses.business.expense.repository.RecurringExpenseRepository;
-import de.roamingthings.junit.category.IntegrationTest;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,13 +22,12 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import static org.hamcrest.CoreMatchers.containsString;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
 /**
@@ -40,7 +37,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 @WebAppConfiguration
-@Category(IntegrationTest.class)
 @ActiveProfiles(resolver = SystemPropertyActiveProfileResolver.class)
 public class RecurringExpenseControllerIT {
     @Autowired

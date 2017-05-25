@@ -16,7 +16,7 @@ import java.time.LocalDate;
  * @version 2017/04/25
  */
 @Configuration
-@Profile("dev")
+@Profile({"dev", "test", "it"})
 public class DevelopProfileDataLoader implements DataInitializer {
     private final RecurringExpenseRepository recurringExpenseRepository;
 

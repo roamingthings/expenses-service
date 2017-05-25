@@ -23,8 +23,6 @@
             <column name="client_secret" value="secret"/>
             <column name="scope" value="read,write,foo,bar"/>
             <column name="authorized_grant_types" value="implicit"/>
-            <column name="web_server_redirect_uri" value="null"/>
-            <column name="authorities" value="null"/>
             <column name="access_token_validity" value="36000"/>
             <column name="refresh_token_validity" value="36000"/>
             <column name="additional_information" value="null"/>

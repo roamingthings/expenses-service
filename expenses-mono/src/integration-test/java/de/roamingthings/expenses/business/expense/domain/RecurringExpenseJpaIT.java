@@ -1,9 +1,7 @@
 package de.roamingthings.expenses.business.expense.domain;
 
 import de.roamingthings.SystemPropertyActiveProfileResolver;
-import de.roamingthings.junit.category.IntegrationTest;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -25,14 +23,13 @@ import static org.junit.Assert.assertThat;
  */
 @RunWith(SpringRunner.class)
 @DataJpaTest
-@Category(IntegrationTest.class)
 @ActiveProfiles(resolver = SystemPropertyActiveProfileResolver.class)
 public class RecurringExpenseJpaIT {
     @Autowired
     private TestEntityManager entityManager;
 
     @Test
-    public void persistingShouldAddCreationAndModifiedDate() {
+    public void should_add_create_and_modified_date_when_persisting() {
         RecurringExpense expense = getRecurringExpenseFixture();
 
         final RecurringExpense persistedExpense = entityManager.persist(expense);
@@ -44,7 +41,7 @@ public class RecurringExpenseJpaIT {
     }
 
     @Test
-    public void updatingShouldUpdateModifiedDate() {
+    public void should_update_modified_date_when_updating() {
         RecurringExpense expense = getRecurringExpenseFixture();
         final RecurringExpense persistedExpense = entityManager.persist(expense);
         persistedExpense.setNote("Modified");

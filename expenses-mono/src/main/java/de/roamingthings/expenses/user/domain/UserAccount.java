@@ -2,11 +2,13 @@ package de.roamingthings.expenses.user.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author Alexander Sparkowsky [info@roamingthings.de]
@@ -17,9 +19,9 @@ import java.util.Set;
 @NoArgsConstructor
 @Table(name = "user_account")
 public class UserAccount {
-    @Id
-    @GeneratedValue
-    private Long id;
+    @Id @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
+    private UUID uuid;
 
     @NotEmpty
     @Size(max = 50)
@@ -33,9 +35,10 @@ public class UserAccount {
     private boolean enabled;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable
-    // ~ defaults to @JoinTable(name = "USER_ROLE", joinColumns = @JoinColumn(name = "user_id"),
-    //     inverseJoinColumns = @joinColumn(name = "role_id"))
+    // ~ defaults to @JoinTable(name = "USER_ROLES", joinColumns = @JoinColumn(name = "user_id"),
+    //     inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JoinTable(name = "USER_ACCOUNT_ROLE", joinColumns = @JoinColumn(name = "user_account_uuid"),
+            inverseJoinColumns = @JoinColumn(name = "role_uuid"))
     private Set<Role> roles;
 
     public UserAccount(String username, String passwordDigest, boolean enabled, Set<Role> roles) {

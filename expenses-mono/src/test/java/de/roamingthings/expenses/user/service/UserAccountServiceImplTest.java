@@ -1,8 +1,8 @@
 package de.roamingthings.expenses.user.service;
 
+import de.roamingthings.expenses.contract.useraccount.repository.UserAccountRepository;
 import de.roamingthings.expenses.user.domain.Role;
 import de.roamingthings.expenses.user.domain.UserAccount;
-import de.roamingthings.expenses.user.repository.UserRepository;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,7 +21,7 @@ import static org.mockito.Mockito.*;
 public class UserAccountServiceImplTest {
     @Test
     public void should_add_user_if_not_existing_in_repository() throws Exception {
-        final UserRepository userRepositoryMock = mock(UserRepository.class);
+        final UserAccountRepository userRepositoryMock = mock(UserAccountRepository.class);
         when(userRepositoryMock.existsByUsername("test")).thenReturn(false);
         final PasswordEncoder passwordEncoderMock = mock(PasswordEncoder.class);
         when(passwordEncoderMock.encode(any())).thenReturn("encoded");
@@ -52,7 +52,7 @@ public class UserAccountServiceImplTest {
 
     @Test
     public void should_not_add_user_if_existing_in_repository() throws Exception {
-        final UserRepository userRepositoryMock = mock(UserRepository.class);
+        final UserAccountRepository userRepositoryMock = mock(UserAccountRepository.class);
         when(userRepositoryMock.existsByUsername("test")).thenReturn(true);
         final PasswordEncoder passwordEncoderMock = mock(PasswordEncoder.class);
 

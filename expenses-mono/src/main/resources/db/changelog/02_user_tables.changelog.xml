@@ -15,7 +15,7 @@
         </preConditions>
 
         <createTable tableName="user_account">
-            <column name="id" type="long" autoIncrement="true">
+            <column name="uuid" type="uuid">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="username" type="varchar(255)">
@@ -40,7 +40,7 @@
         </preConditions>
 
         <createTable tableName="role">
-            <column name="id" type="long" autoIncrement="true">
+            <column name="uuid" type="uuid">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="role" type="varchar(255)">
@@ -61,11 +61,11 @@
         </preConditions>
 
         <createTable tableName="user_account_role">
-            <column name="user_account_id" type="long">
-                <constraints foreignKeyName="fk_user_role_user_account" referencedTableName="user_account" referencedColumnNames="id" nullable="false"/>
+            <column name="user_account_uuid" type="uuid">
+                <constraints foreignKeyName="fk_user_role_user_account" referencedTableName="user_account" referencedColumnNames="uuid" nullable="false"/>
             </column>
-            <column name="role_id" type="long">
-                <constraints foreignKeyName="fk_user_role_role" referencedTableName="role" referencedColumnNames="id" nullable="false"/>
+            <column name="role_uuid" type="uuid">
+                <constraints foreignKeyName="fk_user_role_role" referencedTableName="role" referencedColumnNames="uuid" nullable="false"/>
             </column>
         </createTable>
         

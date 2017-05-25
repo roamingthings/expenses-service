@@ -1,17 +1,10 @@
 package de.roamingthings.expenses.config;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 /**
  * @author Alexander Sparkowsky [info@roamingthings.de]
@@ -40,6 +33,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
                 .addResourceLocations("classpath:/META-INF/resources/webjars/frontend/0.0.1/");
     }
 
+/*
     @Controller
     static class IndexController {
 
@@ -48,5 +42,6 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
             response.sendRedirect("/index.html");
         }
     }
+*/
 
 }

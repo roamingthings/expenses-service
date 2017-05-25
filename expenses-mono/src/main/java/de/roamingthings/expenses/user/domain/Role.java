@@ -4,12 +4,14 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.util.UUID;
 
 /**
  * @author Alexander Sparkowsky [info@roamingthings.de]
@@ -21,9 +23,9 @@ import javax.persistence.Id;
 @ToString
 @EqualsAndHashCode
 public class Role {
-    @Id
-    @GeneratedValue
-    private Long id;
+    @Id @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
+    private UUID uuid;
 
     @NotEmpty
     @Column(nullable = false, unique = true)

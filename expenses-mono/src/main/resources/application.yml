@@ -19,6 +19,12 @@ security:
       scope: read,write
       auto-approve-scopes: '.*'
 
+oauth:
+  accessToken:
+    expirationTimeInSeconds: 86400
+  refreshToken:
+    expirationTimeInSeconds: 2592000
+
 liquibase:
   change-log: classpath:/db/changelog/db.changelog-master.xml
 
