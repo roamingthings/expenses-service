@@ -1,7 +1,7 @@
 package de.roamingthings.expenses.workbench;
 
 import de.roamingthings.SystemPropertyActiveProfileResolver;
-import de.roamingthings.expenses.ExpensesTrackerApplication;
+import de.roamingthings.expenses.main.ExpensesTrackerApplication;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

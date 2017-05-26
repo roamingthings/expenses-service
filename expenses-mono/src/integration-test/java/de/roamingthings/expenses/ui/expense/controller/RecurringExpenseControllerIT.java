@@ -1,10 +1,11 @@
 package de.roamingthings.expenses.ui.expense.controller;
 
 import de.roamingthings.SystemPropertyActiveProfileResolver;
-import de.roamingthings.expenses.business.expense.domain.ExpenseType;
-import de.roamingthings.expenses.business.expense.domain.RecurrencePeriod;
-import de.roamingthings.expenses.business.expense.domain.RecurringExpense;
-import de.roamingthings.expenses.business.expense.repository.RecurringExpenseRepository;
+import de.roamingthings.expenses.expense.domain.ExpenseType;
+import de.roamingthings.expenses.expense.domain.RecurrencePeriod;
+import de.roamingthings.expenses.expense.domain.RecurringExpense;
+import de.roamingthings.expenses.expense.repository.RecurringExpenseRepository;
+import de.roamingthings.expenses.main.ExpensesTrackerApplication;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,7 +36,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @version 2017/04/23
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest
+@SpringBootTest(classes = ExpensesTrackerApplication.class)
 @WebAppConfiguration
 @ActiveProfiles(resolver = SystemPropertyActiveProfileResolver.class)
 public class RecurringExpenseControllerIT {

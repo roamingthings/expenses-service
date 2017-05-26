@@ -11,6 +11,6 @@ public class SystemPropertyActiveProfileResolver implements ActiveProfilesResolv
     @Override
     public String[] resolve(final Class<?> aClass) {
         final String activeProfile = System.getProperty("spring.profiles.active");
-        return new String[] { activeProfile == null ? "test" : activeProfile };
+        return new String[] { activeProfile == null ? "it" : activeProfile };
     }
 }

@@ -50,8 +50,8 @@
             <span layout:fragment="label-content">Recurrence period</span>
             <span layout:fragment="input-content">
                 <select id="recurrencePeriod" class="form-control" th:field="*{{recurrencePeriod}}">
-                    <option th:each="period : ${T(de.roamingthings.expenses.business.expense.domain..RecurrencePeriod).values()}"
-                            th:selected="${period == T(de.roamingthings.expenses.business.expense.domain.RecurrencePeriod)}"
+                    <option th:each="period : ${T(de.roamingthings.expenses.expense.domain.RecurrencePeriod).values()}"
+                            th:selected="${period == T(de.roamingthings.expenses.expense.domain.RecurrencePeriod)}"
                             th:value="${{period}}"
                             th:text="#{${'recurrencePeriod.' + period}}">Option Text
                     </option>
@@ -63,8 +63,8 @@
             <span layout:fragment="label-content">Expense type</span>
             <span layout:fragment="input-content">
                 <select id="expenseType" class="form-control" th:field="*{{expenseType}}">
-                    <option th:each="expenseType : ${T(de.roamingthings.expenses.business.expense.domain..ExpenseType).values()}"
-                            th:selected="${expenseType == T(de.roamingthings.expenses.business.expense.domain.ExpenseType)}"
+                    <option th:each="expenseType : ${T(de.roamingthings.expenses.expense.domain.ExpenseType).values()}"
+                            th:selected="${expenseType == T(de.roamingthings.expenses.expense.domain.ExpenseType)}"
                             th:value="${{expenseType}}"
                             th:text="#{${'expenseType.' + expenseType}}">Wireframe
                     </option>

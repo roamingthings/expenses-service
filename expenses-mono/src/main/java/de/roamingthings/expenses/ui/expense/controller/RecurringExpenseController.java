@@ -1,7 +1,7 @@
 package de.roamingthings.expenses.ui.expense.controller;
 
-import de.roamingthings.expenses.business.expense.domain.RecurringExpense;
-import de.roamingthings.expenses.business.expense.service.RecurringExpenseService;
+import de.roamingthings.expenses.expense.domain.RecurringExpense;
+import de.roamingthings.expenses.expense.service.RecurringExpenseService;
 import lombok.extern.java.Log;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
