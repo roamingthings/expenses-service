@@ -1,10 +1,9 @@
 package de.roamingthings.expenses.main;
 
+import de.roamingthings.expenses.expense.ExpenseModule;
 import de.roamingthings.expenses.health.HealthModule;
 import de.roamingthings.expenses.ui.UIModule;
-import de.roamingthings.expenses.useraccount.UserAccountModule;
 import de.roamingthings.expenses.userprofile.UserProfileModule;
-import de.roamingthings.expenses.expense.ExpenseModule;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -22,7 +21,6 @@ import java.lang.annotation.*;
 @Configuration
 
 @Import({
-        UserAccountModule.class,
         UserProfileModule.class,
         ExpenseModule.class,
         HealthModule.class,

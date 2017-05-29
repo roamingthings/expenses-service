@@ -1,1 +1,2 @@
 include 'expenses-mono', 'expenses-frontend'
+includeBuild '../../commons/persistence-support'

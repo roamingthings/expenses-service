@@ -1,7 +1,7 @@
 package de.roamingthings.expenses.userprofile.domain;
 
-import de.roamingthings.expenses.metadata.Creatable;
-import de.roamingthings.expenses.metadata.Modifiable;
+import de.roamingthings.persistence.auditing.Creatable;
+import de.roamingthings.persistence.auditing.Modifiable;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Email;
